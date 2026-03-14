@@ -1,116 +1,87 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 <meta charset="UTF-8">
-<title>Xander Heredia-Leon | Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Xander Heredia-Leon</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
 
 body{
 margin:0;
-font-family:Arial;
-color:white;
-background:#0b0b0b;
+background:#f7f7f7;
+font-family:'Inter', sans-serif;
+color:#333;
 }
 
-.hero{
-height:100vh;
-background-image:url("images/landing/grasswall.jpg");
-background-size:cover;
-background-position:center;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-position:relative;
-text-align:center;
-}
-
-.hero h1{
-font-size:60px;
-background:rgba(0,0,0,0.6);
-padding:20px 40px;
-border-radius:10px;
-}
+/* NAV */
 
 nav{
-position:absolute;
-bottom:40px;
 display:flex;
-gap:30px;
+justify-content:center;
+gap:40px;
+padding:30px 0;
+font-size:14px;
+letter-spacing:1px;
 }
 
 nav a{
 text-decoration:none;
-color:white;
-background:rgba(0,0,0,0.6);
-padding:12px 20px;
-border-radius:8px;
+color:#555;
 }
 
-.clothesline{
-background:#111;
-padding:70px;
+/* NAME */
+
+.hero{
 text-align:center;
+margin-top:20px;
 }
 
-.line{
-border-top:3px solid white;
+.hero h1{
+font-family:'Playfair Display', serif;
+font-size:64px;
+font-weight:400;
+margin:10px 0;
+}
+
+.hero p{
+font-family:'Playfair Display', serif;
+font-style:italic;
+font-size:22px;
+color:#666;
+margin-bottom:60px;
+}
+
+/* IMAGE ROW */
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:40px;
 width:80%;
 margin:auto;
 }
 
-.photos{
-display:flex;
-justify-content:center;
-gap:50px;
-margin-top:-35px;
-flex-wrap:wrap;
-}
-
-.photo{
-position:relative;
-animation:sway 4s ease-in-out infinite;
-}
-
-.photo img{
-width:260px;
-border:8px solid white;
-cursor:pointer;
-}
-
-.clip{
-width:20px;
-height:20px;
-background:#c79b63;
-position:absolute;
-top:-15px;
-left:50%;
-transform:translateX(-50%);
-}
-
-@keyframes sway{
-0%{transform:rotate(-2deg)}
-50%{transform:rotate(2deg)}
-100%{transform:rotate(-2deg)}
-}
-
-.lightbox{
-display:none;
-position:fixed;
-top:0;
-left:0;
+.gallery img{
 width:100%;
-height:100%;
-background:rgba(0,0,0,0.9);
-justify-content:center;
-align-items:center;
+height:520px;
+object-fit:cover;
 }
 
-.lightbox img{
-max-width:90%;
-max-height:90%;
+@media(max-width:900px){
+
+.gallery{
+grid-template-columns:1fr;
+}
+
+.hero h1{
+font-size:42px;
+}
+
 }
 
 </style>
@@ -119,58 +90,27 @@ max-height:90%;
 
 <body>
 
+<nav>
+<a href="index.html">Home</a>
+<a href="bio.html">About</a>
+<a href="gallery.html">Portfolio</a>
+</nav>
+
 <section class="hero">
 
 <h1>Xander Heredia-Leon</h1>
-
-<nav>
-<a href="gallery.html">Gallery</a>
-<a href="bio.html">Biography</a>
-</nav>
+<p>Visionary of Style</p>
 
 </section>
 
-<section class="clothesline">
+<section class="gallery">
 
-<div class="line"></div>
-
-<div class="photos">
-
-<div class="photo">
-<div class="clip"></div>
-<img src="images/landing/home1.jpg" onclick="openLightbox(this)">
-</div>
-
-<div class="photo">
-<div class="clip"></div>
-<img src="images/landing/home2.jpg" onclick="openLightbox(this)">
-</div>
-
-<div class="photo">
-<div class="clip"></div>
-<img src="images/landing/home3.jpg" onclick="openLightbox(this)">
-</div>
-
-</div>
+<img src="images/landing/home1.jpg">
+<img src="images/landing/home2.jpg">
+<img src="images/landing/home3.jpg">
 
 </section>
-
-<div id="lightbox" class="lightbox" onclick="closeLightbox()">
-<img id="lightbox-img">
-</div>
-
-<script>
-
-function openLightbox(img){
-document.getElementById("lightbox").style.display="flex"
-document.getElementById("lightbox-img").src=img.src
-}
-
-function closeLightbox(){
-document.getElementById("lightbox").style.display="none"
-}
-
-</script>
 
 </body>
+
 </html>
