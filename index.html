@@ -68,7 +68,7 @@ z-index:0;
 .hero h1{
 font-family:'Playfair Display', serif;
 font-size:72px;
-margin-bottom:90px;
+margin-bottom:100px;
 z-index:2;
 position:relative;
 }
@@ -78,20 +78,22 @@ position:relative;
 .gallery{
 position:relative;
 display:flex;
-gap:80px;
+justify-content:center;
+gap:90px;
+width:100%;
 z-index:2;
 }
 
-/* ROPE */
+/* CLOTHESLINE */
 
 .gallery::before{
 content:"";
 position:absolute;
-top:0;
-left:5%;
-width:90%;
-height:20px;
-background:url("images/images/landing/12Z_2103.w011.n001.500A.p15.500.jpg") center/contain no-repeat;
+top:-10px;
+left:0;
+width:100%;
+height:18px;
+background:url("images/images/landing/12Z_2103.w011.n001.500A.p15.500.jpg") center/cover no-repeat;
 z-index:3;
 }
 
@@ -104,22 +106,22 @@ position:relative;
 /* PHOTO */
 
 .photo img{
-width:260px;
+width:250px;
 aspect-ratio:2/3;
 object-fit:cover;
 border:8px solid white;
 box-shadow:0 20px 40px rgba(0,0,0,0.5);
-margin-top:25px;
+margin-top:35px;
 }
 
 /* CLOTHESPIN */
 
 .pin{
 position:absolute;
-top:-10px;
+top:-18px;
 left:50%;
 transform:translateX(-50%);
-width:34px;
+width:22px;
 z-index:4;
 pointer-events:none;
 }
