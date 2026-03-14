@@ -14,7 +14,6 @@
 body{
 margin:0;
 font-family:'Inter', sans-serif;
-color:#222;
 }
 
 /* NAVBAR */
@@ -29,7 +28,7 @@ gap:50px;
 padding:35px 0;
 font-size:13px;
 letter-spacing:2px;
-z-index:3;
+z-index:5;
 }
 
 nav a{
@@ -40,18 +39,18 @@ color:white;
 /* HERO */
 
 .hero{
-padding-top:140px;
+padding-top:150px;
 background:url("images/images/landing/IMG_0900.PNG") center/cover no-repeat;
+min-height:100vh;
 display:flex;
 flex-direction:column;
 align-items:center;
 text-align:center;
 position:relative;
 color:white;
-min-height:100vh;
 }
 
-/* DARK OVERLAY */
+/* OVERLAY */
 
 .hero::before{
 content:"";
@@ -69,9 +68,7 @@ z-index:0;
 .hero h1{
 font-family:'Playfair Display', serif;
 font-size:72px;
-font-weight:400;
-margin:0 0 80px 0;
-position:relative;
+margin-bottom:80px;
 z-index:2;
 }
 
@@ -80,21 +77,20 @@ z-index:2;
 .gallery{
 position:relative;
 display:flex;
-justify-content:center;
 gap:70px;
 z-index:2;
 }
 
-/* CLOTHESLINE */
+/* REAL CLOTHESLINE IMAGE */
 
 .gallery::before{
 content:"";
 position:absolute;
-top:-30px;
-left:10%;
-width:80%;
-height:4px;
-background:#e5e5e5;
+top:-40px;
+left:5%;
+width:90%;
+height:40px;
+background:url("images/images/landing/line.png") center/contain no-repeat;
 }
 
 /* PHOTO WRAPPER */
@@ -113,22 +109,18 @@ border:8px solid white;
 box-shadow:0 15px 30px rgba(0,0,0,0.45);
 }
 
-/* CLOTHESPIN */
+/* REAL CLOTHESPIN */
 
-.photo::before{
-content:"";
+.pin{
 position:absolute;
-top:-35px;
+top:-40px;
 left:50%;
 transform:translateX(-50%);
-width:18px;
-height:30px;
-background:#d6a77a;
-border-radius:3px;
-box-shadow:0 4px 8px rgba(0,0,0,0.4);
+width:40px;
+pointer-events:none;
 }
 
-/* ROTATION FOR HANGING LOOK */
+/* ROTATION */
 
 .photo:nth-child(1){
 transform:rotate(-4deg);
@@ -140,26 +132,6 @@ transform:rotate(2deg);
 
 .photo:nth-child(3){
 transform:rotate(-2deg);
-}
-
-/* MOBILE */
-
-@media(max-width:900px){
-
-.hero h1{
-font-size:42px;
-}
-
-.gallery{
-flex-direction:column;
-align-items:center;
-gap:40px;
-}
-
-.gallery::before{
-display:none;
-}
-
 }
 
 </style>
@@ -182,14 +154,17 @@ display:none;
 
 <div class="photo">
 <img src="images/images/landing/IMG_8904_4headshot.jpg">
+<img class="pin" src="images/images/landing/clothespin.png">
 </div>
 
 <div class="photo">
 <img src="images/images/landing/IMG_8916.jpg">
+<img class="pin" src="images/images/landing/clothespin.png">
 </div>
 
 <div class="photo">
 <img src="images/images/landing/IMG_9018.jpg">
+<img class="pin" src="images/images/landing/clothespin.png">
 </div>
 
 </div>
