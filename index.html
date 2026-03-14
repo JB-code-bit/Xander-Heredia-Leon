@@ -68,7 +68,7 @@ z-index:0;
 .hero h1{
 font-family:'Playfair Display', serif;
 font-size:72px;
-margin-bottom:120px;
+margin-bottom:110px;
 position:relative;
 z-index:2;
 }
@@ -84,14 +84,15 @@ width:100%;
 z-index:2;
 }
 
-/* ROPE */
+/* ROPE IMAGE */
 
 .rope{
 position:absolute;
-top:20px;
+top:0;
 left:0;
 width:100%;
 z-index:1;
+pointer-events:none;
 }
 
 /* PHOTO WRAPPER */
@@ -102,26 +103,27 @@ position:relative;
 
 /* PHOTO */
 
-.photo img.photo-img{
+.photo-img{
 width:250px;
 aspect-ratio:2/3;
 object-fit:cover;
 border:8px solid white;
 box-shadow:0 20px 40px rgba(0,0,0,0.5);
-margin-top:70px;
+margin-top:55px;
 position:relative;
 z-index:2;
 }
 
-/* PIN */
+/* CLOTHESPIN */
 
 .pin{
 position:absolute;
-top:0;
+top:-15px;
 left:50%;
 transform:translateX(-50%);
 width:34px;
 z-index:3;
+pointer-events:none;
 }
 
 /* ROTATION */
@@ -178,4 +180,5 @@ transform:rotate(-2deg);
 </section>
 
 </body>
+
 </html>
