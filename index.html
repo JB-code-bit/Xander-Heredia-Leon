@@ -68,7 +68,7 @@ z-index:0;
 .hero h1{
 font-family:'Playfair Display', serif;
 font-size:72px;
-margin-bottom:110px;
+margin-bottom:120px;
 position:relative;
 z-index:2;
 }
@@ -84,15 +84,17 @@ width:100%;
 z-index:2;
 }
 
-/* ROPE IMAGE */
+/* ROPE */
 
-.rope{
+.gallery::before{
+content:"";
 position:absolute;
-top:0;
+top:15px;
 left:0;
 width:100%;
+height:18px;
+background:url("images/images/landing/12Z_2103.w011.n001.500A.p15.500.jpg") center/cover no-repeat;
 z-index:1;
-pointer-events:none;
 }
 
 /* PHOTO WRAPPER */
@@ -103,13 +105,13 @@ position:relative;
 
 /* PHOTO */
 
-.photo-img{
+.photo img:first-child{
 width:250px;
 aspect-ratio:2/3;
 object-fit:cover;
 border:8px solid white;
 box-shadow:0 20px 40px rgba(0,0,0,0.5);
-margin-top:55px;
+margin-top:60px;
 position:relative;
 z-index:2;
 }
@@ -118,25 +120,25 @@ z-index:2;
 
 .pin{
 position:absolute;
-top:-15px;
+top:0;
 left:50%;
 transform:translateX(-50%);
-width:34px;
-z-index:3;
+width:32px;
+z-index:5;
 pointer-events:none;
 }
 
 /* ROTATION */
 
-.photo:nth-child(2){
+.photo:nth-child(1){
 transform:rotate(-4deg);
 }
 
-.photo:nth-child(3){
+.photo:nth-child(2){
 transform:rotate(2deg);
 }
 
-.photo:nth-child(4){
+.photo:nth-child(3){
 transform:rotate(-2deg);
 }
 
@@ -158,20 +160,18 @@ transform:rotate(-2deg);
 
 <div class="gallery">
 
-<img class="rope" src="images/images/landing/12Z_2103.w011.n001.500A.p15.500.jpg">
-
 <div class="photo">
-<img class="photo-img" src="images/images/landing/IMG_8904_4headshot.jpg">
+<img src="images/images/landing/IMG_8904_4headshot.jpg">
 <img class="pin" src="images/images/landing/Adobe Express - file.png">
 </div>
 
 <div class="photo">
-<img class="photo-img" src="images/images/landing/IMG_8916.jpg">
+<img src="images/images/landing/IMG_8916.jpg">
 <img class="pin" src="images/images/landing/Adobe Express - file.png">
 </div>
 
 <div class="photo">
-<img class="photo-img" src="images/images/landing/IMG_9018.jpg">
+<img src="images/images/landing/IMG_9018.jpg">
 <img class="pin" src="images/images/landing/Adobe Express - file.png">
 </div>
 
@@ -180,5 +180,4 @@ transform:rotate(-2deg);
 </section>
 
 </body>
-
 </html>
