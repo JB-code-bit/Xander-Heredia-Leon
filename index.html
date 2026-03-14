@@ -39,7 +39,7 @@ color:white;
 /* HERO */
 
 .hero{
-padding-top:150px;
+padding-top:160px;
 background:url("images/images/landing/IMG_0900.PNG") center/cover no-repeat;
 min-height:100vh;
 display:flex;
@@ -68,8 +68,9 @@ z-index:0;
 .hero h1{
 font-family:'Playfair Display', serif;
 font-size:72px;
-margin-bottom:80px;
+margin-bottom:90px;
 z-index:2;
+position:relative;
 }
 
 /* GALLERY */
@@ -77,20 +78,21 @@ z-index:2;
 .gallery{
 position:relative;
 display:flex;
-gap:70px;
+gap:80px;
 z-index:2;
 }
 
-/* REAL CLOTHESLINE IMAGE */
+/* ROPE */
 
 .gallery::before{
 content:"";
 position:absolute;
-top:-40px;
+top:0;
 left:5%;
 width:90%;
-height:40px;
+height:20px;
 background:url("images/images/landing/12Z_2103.w011.n001.500A.p15.500.jpg") center/contain no-repeat;
+z-index:3;
 }
 
 /* PHOTO WRAPPER */
@@ -106,17 +108,19 @@ width:260px;
 aspect-ratio:2/3;
 object-fit:cover;
 border:8px solid white;
-box-shadow:0 15px 30px rgba(0,0,0,0.45);
+box-shadow:0 20px 40px rgba(0,0,0,0.5);
+margin-top:25px;
 }
 
-/* REAL CLOTHESPIN */
+/* CLOTHESPIN */
 
 .pin{
 position:absolute;
-top:-40px;
+top:-10px;
 left:50%;
 transform:translateX(-50%);
-width:40px;
+width:34px;
+z-index:4;
 pointer-events:none;
 }
 
