@@ -50,7 +50,7 @@ position:relative;
 color:white;
 }
 
-/* OVERLAY */
+/* DARK OVERLAY */
 
 .hero::before{
 content:"";
@@ -84,17 +84,15 @@ width:100%;
 z-index:2;
 }
 
-/* ROPE */
+/* ROPE IMAGE */
 
-.gallery::before{
-content:"";
+.rope{
 position:absolute;
 top:15px;
 left:0;
 width:100%;
-height:18px;
-background:url("images/images/landing/12Z_2103.w011.n001.500A.p15.500.jpg") center/cover no-repeat;
 z-index:1;
+pointer-events:none;
 }
 
 /* PHOTO WRAPPER */
@@ -120,11 +118,11 @@ z-index:2;
 
 .pin{
 position:absolute;
-top:0;
+top:5px;
 left:50%;
 transform:translateX(-50%);
 width:32px;
-z-index:5;
+z-index:3;
 pointer-events:none;
 }
 
@@ -159,6 +157,8 @@ transform:rotate(-2deg);
 <h1>Xander Heredia-Leon</h1>
 
 <div class="gallery">
+
+<img class="rope" src="images/images/landing/12Z_2103.w011.n001.500A.p15.500.jpg">
 
 <div class="photo">
 <img src="images/images/landing/IMG_8904_4headshot.jpg">
