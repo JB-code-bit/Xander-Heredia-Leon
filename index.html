@@ -1,117 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Xander Heredia-Leon | Portfolio</title>
 
 <style>
 
 body{
 margin:0;
-font-family:Arial, Helvetica, sans-serif;
+font-family:Arial;
 color:white;
-background:#0a0a0a;
+background:#0b0b0b;
 }
-
-/* grass wall background */
 
 .hero{
 height:100vh;
-background-image:url("images/grasswall.jpg");
+background-image:url("images/landing/grasswall.jpg");
 background-size:cover;
 background-position:center;
 display:flex;
 flex-direction:column;
-align-items:center;
 justify-content:center;
+align-items:center;
 position:relative;
-}
-
-/* name */
-
-.hero h1{
-font-size:60px;
-background:rgba(0,0,0,0.5);
-padding:20px 40px;
-border-radius:10px;
-letter-spacing:2px;
-}
-
-/* string lights */
-
-.lights{
-position:absolute;
-top:20px;
-right:20px;
-}
-
-.light{
-width:10px;
-height:10px;
-background:gold;
-border-radius:50%;
-display:inline-block;
-margin:5px;
-animation:twinkle 2s infinite alternate;
-}
-
-@keyframes twinkle{
-from{opacity:0.3;}
-to{opacity:1;}
-}
-
-/* clothesline photo section */
-
-.clothesline{
-background:#111;
-padding:60px;
 text-align:center;
 }
 
-.line{
-border-top:3px solid white;
-margin:40px auto;
-width:80%;
-position:relative;
-}
-
-.photos{
-display:flex;
-justify-content:center;
-gap:40px;
-margin-top:-30px;
-flex-wrap:wrap;
-}
-
-.photo{
-position:relative;
-}
-
-.photo img{
-width:250px;
-border:8px solid white;
-box-shadow:0 10px 20px rgba(0,0,0,0.6);
-}
-
-/* clip */
-
-.clip{
-width:20px;
-height:20px;
-background:#c49b6c;
-position:absolute;
-top:-15px;
-left:50%;
-transform:translateX(-50%);
-border-radius:3px;
+.hero h1{
+font-size:60px;
+background:rgba(0,0,0,0.6);
+padding:20px 40px;
+border-radius:10px;
 }
 
 nav{
 position:absolute;
-bottom:30px;
+bottom:40px;
 display:flex;
 gap:30px;
 }
@@ -119,13 +44,77 @@ gap:30px;
 nav a{
 text-decoration:none;
 color:white;
-font-size:20px;
-background:rgba(0,0,0,0.5);
-padding:10px 20px;
+background:rgba(0,0,0,0.6);
+padding:12px 20px;
 border-radius:8px;
 }
 
+.clothesline{
+background:#111;
+padding:70px;
+text-align:center;
+}
+
+.line{
+border-top:3px solid white;
+width:80%;
+margin:auto;
+}
+
+.photos{
+display:flex;
+justify-content:center;
+gap:50px;
+margin-top:-35px;
+flex-wrap:wrap;
+}
+
+.photo{
+position:relative;
+animation:sway 4s ease-in-out infinite;
+}
+
+.photo img{
+width:260px;
+border:8px solid white;
+cursor:pointer;
+}
+
+.clip{
+width:20px;
+height:20px;
+background:#c79b63;
+position:absolute;
+top:-15px;
+left:50%;
+transform:translateX(-50%);
+}
+
+@keyframes sway{
+0%{transform:rotate(-2deg)}
+50%{transform:rotate(2deg)}
+100%{transform:rotate(-2deg)}
+}
+
+.lightbox{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.9);
+justify-content:center;
+align-items:center;
+}
+
+.lightbox img{
+max-width:90%;
+max-height:90%;
+}
+
 </style>
+
 </head>
 
 <body>
@@ -133,16 +122,6 @@ border-radius:8px;
 <section class="hero">
 
 <h1>Xander Heredia-Leon</h1>
-
-<!-- twinkling lights -->
-
-<div class="lights">
-<span class="light"></span>
-<span class="light"></span>
-<span class="light"></span>
-<span class="light"></span>
-<span class="light"></span>
-</div>
 
 <nav>
 <a href="gallery.html">Gallery</a>
@@ -159,22 +138,39 @@ border-radius:8px;
 
 <div class="photo">
 <div class="clip"></div>
-<img src="images/home1.jpg">
+<img src="images/landing/home1.jpg" onclick="openLightbox(this)">
 </div>
 
 <div class="photo">
 <div class="clip"></div>
-<img src="images/home2.jpg">
+<img src="images/landing/home2.jpg" onclick="openLightbox(this)">
 </div>
 
 <div class="photo">
 <div class="clip"></div>
-<img src="images/home3.jpg">
+<img src="images/landing/home3.jpg" onclick="openLightbox(this)">
 </div>
 
 </div>
 
 </section>
+
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+<img id="lightbox-img">
+</div>
+
+<script>
+
+function openLightbox(img){
+document.getElementById("lightbox").style.display="flex"
+document.getElementById("lightbox-img").src=img.src
+}
+
+function closeLightbox(){
+document.getElementById("lightbox").style.display="none"
+}
+
+</script>
 
 </body>
 </html>
