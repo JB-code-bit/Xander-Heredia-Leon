@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Xander Heredia-Leon | Portfolio</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+color:white;
+background:#0a0a0a;
+}
+
+/* grass wall background */
+
+.hero{
+height:100vh;
+background-image:url("images/grasswall.jpg");
+background-size:cover;
+background-position:center;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+position:relative;
+}
+
+/* name */
+
+.hero h1{
+font-size:60px;
+background:rgba(0,0,0,0.5);
+padding:20px 40px;
+border-radius:10px;
+letter-spacing:2px;
+}
+
+/* string lights */
+
+.lights{
+position:absolute;
+top:20px;
+right:20px;
+}
+
+.light{
+width:10px;
+height:10px;
+background:gold;
+border-radius:50%;
+display:inline-block;
+margin:5px;
+animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+from{opacity:0.3;}
+to{opacity:1;}
+}
+
+/* clothesline photo section */
+
+.clothesline{
+background:#111;
+padding:60px;
+text-align:center;
+}
+
+.line{
+border-top:3px solid white;
+margin:40px auto;
+width:80%;
+position:relative;
+}
+
+.photos{
+display:flex;
+justify-content:center;
+gap:40px;
+margin-top:-30px;
+flex-wrap:wrap;
+}
+
+.photo{
+position:relative;
+}
+
+.photo img{
+width:250px;
+border:8px solid white;
+box-shadow:0 10px 20px rgba(0,0,0,0.6);
+}
+
+/* clip */
+
+.clip{
+width:20px;
+height:20px;
+background:#c49b6c;
+position:absolute;
+top:-15px;
+left:50%;
+transform:translateX(-50%);
+border-radius:3px;
+}
+
+nav{
+position:absolute;
+bottom:30px;
+display:flex;
+gap:30px;
+}
+
+nav a{
+text-decoration:none;
+color:white;
+font-size:20px;
+background:rgba(0,0,0,0.5);
+padding:10px 20px;
+border-radius:8px;
+}
+
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+
+<h1>Xander Heredia-Leon</h1>
+
+<!-- twinkling lights -->
+
+<div class="lights">
+<span class="light"></span>
+<span class="light"></span>
+<span class="light"></span>
+<span class="light"></span>
+<span class="light"></span>
+</div>
+
+<nav>
+<a href="gallery.html">Gallery</a>
+<a href="bio.html">Biography</a>
+</nav>
+
+</section>
+
+<section class="clothesline">
+
+<div class="line"></div>
+
+<div class="photos">
+
+<div class="photo">
+<div class="clip"></div>
+<img src="images/home1.jpg">
+</div>
+
+<div class="photo">
+<div class="clip"></div>
+<img src="images/home2.jpg">
+</div>
+
+<div class="photo">
+<div class="clip"></div>
+<img src="images/home3.jpg">
+</div>
+
+</div>
+
+</section>
+
+</body>
+</html>
