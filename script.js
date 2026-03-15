@@ -5,10 +5,15 @@ let images = []
 async function load(){
 
     try{
+
         const res = await fetch("data/images.json")
+
         images = await res.json()
+
     }catch{
-        images=[]
+
+        images = []
+
     }
 
     display()
@@ -19,15 +24,15 @@ load()
 
 function display(){
 
-    gallery.innerHTML=""
+    gallery.innerHTML = ""
 
     images.forEach(img=>{
 
-        const photo=document.createElement("div")
+        const photo = document.createElement("div")
 
-        photo.className="photo"
+        photo.className = "photo"
 
-        photo.innerHTML=`
+        photo.innerHTML = `
 
         <img src="${img.src}" class="polaroid">
 
@@ -41,7 +46,7 @@ function display(){
 
 }
 
-/* CONTINUOUS CLOTHESLINE SCROLL */
+/* CLOTHESLINE AUTO SCROLL */
 
 let scrollSpeed = 0.35
 
@@ -60,3 +65,17 @@ function autoScroll(){
 }
 
 autoScroll()
+
+/* HOVER PAUSE */
+
+gallery.addEventListener("mouseenter", ()=>{
+
+scrollSpeed = 0
+
+})
+
+gallery.addEventListener("mouseleave", ()=>{
+
+scrollSpeed = 0.35
+
+})
