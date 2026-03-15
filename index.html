@@ -130,7 +130,7 @@ position:relative;
 flex-shrink:0;
 }
 
-/* POLAROID FRAME */
+/* POLAROID */
 
 .polaroid{
 
@@ -289,8 +289,6 @@ photo.style.transform=`rotate(${rotation}deg)`
 
 photo.style.animation=`swing${i} ${swingSpeed}s ease-in-out infinite`
 
-/* CREATE UNIQUE SWING ANIMATION */
-
 const style=document.createElement("style")
 
 style.innerHTML=`
@@ -312,9 +310,7 @@ document.head.appendChild(style)
 photo.innerHTML=`
 
 <div class="polaroid">
-
 <div class="placeholder"></div>
-
 </div>
 
 <img class="pin" src="images/images/landing/Adobe Express - file.png">
@@ -325,14 +321,14 @@ gallery.appendChild(photo)
 
 }
 
-/* AUTO SCROLL */
+/* AUTO SCROLL (50% FASTER) */
 
 let auto=true
 
 function autoScroll(){
 
 if(auto){
-gallery.scrollLeft += 1.2
+gallery.scrollLeft += 3.3
 }
 
 requestAnimationFrame(autoScroll)
@@ -341,7 +337,7 @@ requestAnimationFrame(autoScroll)
 
 autoScroll()
 
-/* BUTTON SCROLL (STOPS AUTO) */
+/* BUTTON SCROLL */
 
 function scrollLeft(){
 auto=false
