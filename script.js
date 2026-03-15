@@ -41,11 +41,19 @@ function display(){
 
 }
 
-/* AUTO SCROLL */
+/* CONTINUOUS CLOTHESLINE SCROLL */
+
+let scrollSpeed = 0.35
 
 function autoScroll(){
 
-    gallery.scrollLeft += 0.5
+    gallery.scrollLeft += scrollSpeed
+
+    if(gallery.scrollLeft >= gallery.scrollWidth - gallery.clientWidth){
+
+        gallery.scrollLeft = 0
+
+    }
 
     requestAnimationFrame(autoScroll)
 
