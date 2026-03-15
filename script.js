@@ -10,7 +10,7 @@ photo.innerHTML=`
 
 <img src="">
 
-<img class="pin" src="images/pin.png">
+<img class="pin" src="images/Adobe Express - file.png">
 
 `
 
