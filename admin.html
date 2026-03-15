@@ -16,15 +16,11 @@ background:url("images/IMG_0900.PNG") center/cover fixed;
 color:white;
 }
 
-/* DARK OVERLAY */
-
 .overlay{
 background:rgba(0,0,0,.8);
 min-height:100vh;
 padding:40px;
 }
-
-/* HEADER */
 
 .header{
 display:flex;
@@ -35,14 +31,7 @@ flex-wrap:wrap;
 gap:10px;
 }
 
-h1{
-margin:0;
-}
-
-/* INSTAGRAM UPLOAD BUTTON */
-
 .uploadBtn{
-
 background:white;
 color:black;
 padding:10px 18px;
@@ -50,77 +39,75 @@ border:none;
 border-radius:6px;
 cursor:pointer;
 font-size:16px;
-
 }
 
 .uploadInput{
 display:none;
 }
 
+/* DRAG ZONE */
+
+.dropzone{
+
+border:3px dashed white;
+padding:40px;
+text-align:center;
+margin-bottom:30px;
+transition:.3s;
+
+}
+
+.dropzone.dragover{
+background:#222;
+border-color:#00ffcc;
+}
+
 /* GRID */
 
 .grid{
-
 display:grid;
 grid-template-columns:repeat(auto-fill,220px);
 gap:20px;
 justify-content:center;
-
 }
 
 /* CARD */
 
 .card{
-
 background:#111;
 border-radius:10px;
 overflow:hidden;
 box-shadow:0 10px 30px rgba(0,0,0,.6);
 transition:.3s;
-
 }
 
 .card:hover{
-
 transform:scale(1.05);
-
 }
 
-/* IMAGE */
-
 .card img{
-
 width:100%;
 height:220px;
 object-fit:cover;
-
 }
 
-/* CONTROLS */
-
 .controls{
-
 padding:10px;
 text-align:center;
-
 }
 
 .controls select,
 .controls input{
-
 width:90%;
 padding:6px;
 margin-bottom:6px;
-
 }
 
 .controls button{
-
 margin:4px;
 padding:6px 10px;
 border:none;
 cursor:pointer;
-
 }
 
 .hide{
@@ -133,10 +120,7 @@ background:#ff4d4d;
 color:white;
 }
 
-/* SAVE BUTTON */
-
 .save{
-
 margin-top:30px;
 padding:12px 20px;
 font-size:16px;
@@ -144,7 +128,6 @@ border:none;
 cursor:pointer;
 background:white;
 color:black;
-
 }
 
 </style>
@@ -160,21 +143,22 @@ color:black;
 <h1>Portfolio Admin</h1>
 
 <label class="uploadBtn">
-
 ➕ Upload Photos
-
 <input type="file" id="upload" class="uploadInput" multiple>
-
 </label>
+
+</div>
+
+<div id="dropzone" class="dropzone">
+
+Drag Photos Here
 
 </div>
 
 <div id="grid" class="grid"></div>
 
 <button class="save" onclick="downloadJSON()">
-
 Download Updated images.json
-
 </button>
 
 </div>
@@ -243,37 +227,27 @@ const select=card.querySelector("select")
 select.value=img.category
 
 select.onchange=()=>{
-
 images[index].category=select.value
-
 }
 
 const keywordInput=card.querySelector("input")
 
 keywordInput.oninput=()=>{
-
 images[index].keywords=keywordInput.value
-
 }
 
 const hideBtn=card.querySelector(".hide")
 
 hideBtn.onclick=()=>{
-
 images[index].visible=!images[index].visible
-
 display()
-
 }
 
 const delBtn=card.querySelector(".delete")
 
 delBtn.onclick=()=>{
-
 images.splice(index,1)
-
 display()
-
 }
 
 grid.appendChild(card)
@@ -282,11 +256,38 @@ grid.appendChild(card)
 
 }
 
-/* UPLOAD */
+/* FILE BUTTON UPLOAD */
 
 document.getElementById("upload").addEventListener("change",(e)=>{
 
-const files=e.target.files
+addFiles(e.target.files)
+
+})
+
+/* DRAG DROP */
+
+const dropzone=document.getElementById("dropzone")
+
+dropzone.addEventListener("dragover",(e)=>{
+e.preventDefault()
+dropzone.classList.add("dragover")
+})
+
+dropzone.addEventListener("dragleave",()=>{
+dropzone.classList.remove("dragover")
+})
+
+dropzone.addEventListener("drop",(e)=>{
+
+e.preventDefault()
+
+dropzone.classList.remove("dragover")
+
+addFiles(e.dataTransfer.files)
+
+})
+
+function addFiles(files){
 
 for(let file of files){
 
@@ -303,7 +304,7 @@ keywords:""
 
 display()
 
-})
+}
 
 /* DOWNLOAD JSON */
 
