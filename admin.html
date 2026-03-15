@@ -272,7 +272,7 @@ addFiles(e.dataTransfer.files)
 
 })
 
-/* UPLOAD TO GITHUB */
+/* UPLOAD */
 
 async function addFiles(files){
 
@@ -284,13 +284,13 @@ reader.onload=async function(e){
 
 const base64=e.target.result.split(",")[1]
 
-await fetch("https://api.github.com/repos/YOUR_USERNAME/YOUR_REPO/dispatches",{
+await fetch("https://api.github.com/repos/JB-code-bit/Xander-Heredia-Leon/dispatches",{
 
 method:"POST",
 
 headers:{
 "Accept":"application/vnd.github+json",
-"Authorization":"token YOUR_TOKEN"
+"Content-Type":"application/json"
 },
 
 body:JSON.stringify({
