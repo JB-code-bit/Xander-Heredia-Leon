@@ -75,13 +75,13 @@ position:relative;
 z-index:2;
 }
 
-/* SCROLL BUTTONS */
+/* CONTROLS */
 
 .controls{
 display:flex;
 gap:20px;
-margin-bottom:30px;
-z-index:2;
+margin-bottom:20px;
+z-index:3;
 }
 
 .controls button{
@@ -92,24 +92,43 @@ color:black;
 cursor:pointer;
 }
 
+/* GALLERY CONTAINER */
+
+.gallery-wrapper{
+position:relative;
+width:100%;
+overflow:hidden;
+}
+
+/* ROPE LAYER */
+
+.rope{
+
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:30px;
+
+background-color:rgba(0,0,0,0.4);
+
+background-image:url("images/images/landing/12Z_2103.w011.n001.500A.p15.500.jpg");
+background-repeat:repeat-x;
+background-size:auto 18px;
+background-position:center;
+
+z-index:3;
+}
+
 /* GALLERY */
 
 .gallery{
 
 display:flex;
 gap:80px;
-width:100%;
 overflow-x:auto;
 padding:40px 80px;
 scroll-behavior:smooth;
-z-index:2;
-
-/* ROPE BACKGROUND (FIXED) */
-
-background-image:url("images/images/landing/12Z_2103.w011.n001.500A.p15.500.jpg");
-background-repeat:repeat-x;
-background-position:top;
-background-size:auto 18px;
 
 }
 
@@ -119,7 +138,7 @@ background-size:auto 18px;
 position:relative;
 }
 
-/* POLAROID PLACEHOLDER */
+/* POLAROID */
 
 .placeholder{
 width:250px;
@@ -133,7 +152,7 @@ box-shadow:0 20px 40px rgba(0,0,0,0.6);
 
 .pin{
 position:absolute;
-top:-8px;
+top:-6px;
 left:50%;
 transform:translateX(-50%);
 width:32px;
@@ -171,13 +190,19 @@ transform:rotate(2deg);
 <button onclick="scrollRight()">▶</button>
 </div>
 
+<div class="gallery-wrapper">
+
+<div class="rope"></div>
+
 <div class="gallery" id="gallery"></div>
+
+</div>
 
 </section>
 
 <script>
 
-/* GENERATE 200 POLAROIDS */
+/* CREATE 200 POLAROID SLOTS */
 
 const gallery = document.getElementById("gallery")
 
@@ -186,7 +211,7 @@ for(let i=0;i<200;i++){
 const photo = document.createElement("div")
 photo.className="photo"
 
-photo.innerHTML = `
+photo.innerHTML=`
 <div class="placeholder"></div>
 <img class="pin" src="images/images/landing/Adobe Express - file.png">
 `
@@ -211,13 +236,13 @@ requestAnimationFrame(autoScroll)
 
 autoScroll()
 
-/* STOP AUTOSCROLL */
+/* STOP AUTO WHEN USER INTERACTS */
 
 gallery.addEventListener("wheel",()=>auto=false)
 gallery.addEventListener("mouseenter",()=>auto=false)
 gallery.addEventListener("touchstart",()=>auto=false)
 
-/* BUTTON SCROLL */
+/* BUTTON CONTROLS */
 
 function scrollLeft(){
 auto=false
