@@ -276,17 +276,11 @@ const photo=document.createElement("div")
 
 photo.className="photo"
 
-/* RANDOM ROTATION */
 let rotation=(Math.random()*6)-3
-
-/* RANDOM SWING SPEED */
 let swingSpeed=5 + Math.random()*4
-
-/* RANDOM SWING ANGLE */
 let swingAngle=1 + Math.random()*3
 
 photo.style.transform=`rotate(${rotation}deg)`
-
 photo.style.animation=`swing${i} ${swingSpeed}s ease-in-out infinite`
 
 const style=document.createElement("style")
@@ -296,9 +290,7 @@ style.innerHTML=`
 @keyframes swing${i}{
 
 0%{ transform:rotate(${rotation}deg); }
-
 50%{ transform:rotate(${rotation + swingAngle}deg); }
-
 100%{ transform:rotate(${rotation}deg); }
 
 }
@@ -321,7 +313,7 @@ gallery.appendChild(photo)
 
 }
 
-/* AUTO SCROLL (50% FASTER) */
+/* AUTO SCROLL */
 
 let auto=true
 
@@ -337,16 +329,43 @@ requestAnimationFrame(autoScroll)
 
 autoScroll()
 
+/* SMOOTH MANUAL SCROLL */
+
+function smoothScroll(distance){
+
+let start=gallery.scrollLeft
+let target=start+distance
+let duration=700
+let startTime=null
+
+function animation(time){
+
+if(!startTime) startTime=time
+let progress=time-startTime
+let percent=Math.min(progress/duration,1)
+
+gallery.scrollLeft=start+(distance*percent)
+
+if(percent<1){
+requestAnimationFrame(animation)
+}
+
+}
+
+requestAnimationFrame(animation)
+
+}
+
 /* BUTTON SCROLL */
 
 function scrollLeft(){
 auto=false
-gallery.scrollLeft -= 800
+smoothScroll(-400)
 }
 
 function scrollRight(){
 auto=false
-gallery.scrollLeft += 800
+smoothScroll(400)
 }
 
 </script>
