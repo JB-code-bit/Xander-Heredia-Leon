@@ -1,6 +1,24 @@
-const gallery=document.getElementById("gallery")
+const gallery = document.getElementById("gallery")
 
-let images=JSON.parse(localStorage.getItem("portfolioImages")) || []
+let images = JSON.parse(localStorage.getItem("portfolioImages")) || []
+
+const categories = [
+"headshot",
+"waistup",
+"posing",
+"fullbody",
+"shirtless"
+]
+
+let orderedImages = []
+
+categories.forEach(cat=>{
+images.forEach(img=>{
+if(img.category===cat){
+orderedImages.push(img)
+}
+})
+})
 
 for(let i=0;i<200;i++){
 
@@ -10,9 +28,9 @@ photo.className="photo"
 
 let imgHTML=""
 
-if(images[i]){
+if(orderedImages[i]){
 
-imgHTML=`<img src="${images[i]}" class="polaroid">`
+imgHTML=`<img src="${orderedImages[i].src}" class="polaroid">`
 
 }else{
 
@@ -32,7 +50,7 @@ gallery.appendChild(photo)
 
 }
 
-/* CLICK INTERACTION */
+/* CLICK EFFECT */
 
 document.querySelectorAll(".photo").forEach(photo=>{
 
@@ -50,10 +68,23 @@ photo.classList.add("active")
 
 function autoScroll(){
 
-gallery.scrollLeft+=.8
+gallery.scrollLeft += 0.8
 
 requestAnimationFrame(autoScroll)
 
 }
 
 autoScroll()
+
+/* CATEGORY JUMP */
+
+function jump(position){
+
+gallery.scrollTo({
+
+left: position * 350,
+behavior: "smooth"
+
+})
+
+}
