@@ -38,7 +38,7 @@ text-decoration:none;
 color:white;
 }
 
-/* HERO WITH GRASS WALL */
+/* HERO */
 
 .hero{
 padding-top:170px;
@@ -75,7 +75,7 @@ position:relative;
 z-index:2;
 }
 
-/* SCROLL BUTTONS */
+/* CONTROLS */
 
 .controls{
 display:flex;
@@ -90,9 +90,10 @@ border:none;
 background:white;
 color:black;
 cursor:pointer;
+font-size:14px;
 }
 
-/* CLOTHESLINE */
+/* GALLERY */
 
 .gallery{
 position:relative;
@@ -105,7 +106,7 @@ scroll-behavior:smooth;
 z-index:2;
 }
 
-/* ROPE */
+/* LOOPING ROPE */
 
 .gallery::before{
 content:"";
@@ -114,7 +115,11 @@ top:15px;
 left:0;
 width:100%;
 height:18px;
-background:url("images/images/landing/12Z_2103.w011.n001.500A.p15.500.jpg") center/cover no-repeat;
+
+background-image:url("images/images/landing/12Z_2103.w011.n001.500A.p15.500.jpg");
+background-repeat:repeat-x;
+background-size:auto 18px;
+
 z-index:1;
 }
 
@@ -124,7 +129,7 @@ z-index:1;
 position:relative;
 }
 
-/* BLANK POLAROID */
+/* POLAROID PLACEHOLDER */
 
 .placeholder{
 width:250px;
@@ -182,7 +187,7 @@ transform:rotate(2deg);
 
 <script>
 
-/* CREATE 200 EMPTY POLAROID SLOTS */
+/* CREATE 200 BLANK POLAROIDS */
 
 const gallery = document.getElementById("gallery")
 
@@ -191,7 +196,7 @@ for(let i=0;i<200;i++){
 const photo = document.createElement("div")
 photo.className="photo"
 
-photo.innerHTML = `
+photo.innerHTML=`
 <div class="placeholder"></div>
 <img class="pin" src="images/images/landing/Adobe Express - file.png">
 `
@@ -202,13 +207,13 @@ gallery.appendChild(photo)
 
 /* AUTO SCROLL */
 
-let auto = true
+let auto=true
 
 function autoScroll(){
 
 if(!auto) return
 
-gallery.scrollLeft += 0.4
+gallery.scrollLeft+=0.4
 
 requestAnimationFrame(autoScroll)
 
@@ -216,22 +221,22 @@ requestAnimationFrame(autoScroll)
 
 autoScroll()
 
-/* STOP AUTO WHEN USER INTERACTS */
+/* STOP AUTO ON USER ACTION */
 
 gallery.addEventListener("wheel",()=>auto=false)
 gallery.addEventListener("mouseenter",()=>auto=false)
 gallery.addEventListener("touchstart",()=>auto=false)
 
-/* BUTTON SCROLL */
+/* BUTTON CONTROLS */
 
 function scrollLeft(){
 auto=false
-gallery.scrollLeft -= 600
+gallery.scrollLeft-=600
 }
 
 function scrollRight(){
 auto=false
-gallery.scrollLeft += 600
+gallery.scrollLeft+=600
 }
 
 </script>
