@@ -2,20 +2,23 @@ body{
 margin:0;
 background:url("images/IMG_0900.PNG") center/cover no-repeat fixed;
 font-family:Arial;
-text-align:center;
 color:white;
+text-align:center;
 }
+
+/* TITLE */
 
 h1{
 margin-top:120px;
 font-size:70px;
 }
 
-/* SCENE AREA */
+/* SCENE WRAPPER */
 
 .scene{
 position:relative;
-margin-top:120px;
+width:100%;
+margin-top:100px;
 }
 
 /* ROPE */
@@ -23,13 +26,10 @@ margin-top:120px;
 .rope{
 
 position:absolute;
-
-top:40px;
-
-left:0;
+top:0;
 
 width:100%;
-height:16px;
+height:18px;
 
 background:url("images/12Z_2103.w011.n001.500A.p15.500.jpg") repeat-x;
 
@@ -42,10 +42,11 @@ z-index:1;
 .gallery{
 
 display:flex;
+gap:80px;
 
-gap:90px;
-
-padding-top:60px;
+padding-top:40px;
+padding-left:80px;
+padding-right:80px;
 
 overflow-x:auto;
 
@@ -89,7 +90,7 @@ left:50%;
 
 transform:translateX(-50%);
 
-width:36px;
+width:40px;
 
 z-index:2;
 
