@@ -17,10 +17,12 @@ color:white;
 }
 
 .overlay{
-background:rgba(0,0,0,.8);
+background:rgba(0,0,0,.85);
 min-height:100vh;
 padding:40px;
 }
+
+/* HEADER */
 
 .header{
 display:flex;
@@ -28,7 +30,6 @@ justify-content:space-between;
 align-items:center;
 margin-bottom:30px;
 flex-wrap:wrap;
-gap:10px;
 }
 
 .uploadBtn{
@@ -48,13 +49,11 @@ display:none;
 /* DRAG ZONE */
 
 .dropzone{
-
 border:3px dashed white;
 padding:40px;
 text-align:center;
 margin-bottom:30px;
 transition:.3s;
-
 }
 
 .dropzone.dragover{
@@ -71,18 +70,13 @@ gap:20px;
 justify-content:center;
 }
 
-/* CARD */
+/* PHOTO CARD */
 
 .card{
 background:#111;
 border-radius:10px;
 overflow:hidden;
 box-shadow:0 10px 30px rgba(0,0,0,.6);
-transition:.3s;
-}
-
-.card:hover{
-transform:scale(1.05);
 }
 
 .card img{
@@ -150,9 +144,7 @@ color:black;
 </div>
 
 <div id="dropzone" class="dropzone">
-
 Drag Photos Here
-
 </div>
 
 <div id="grid" class="grid"></div>
@@ -170,14 +162,10 @@ let images=[]
 async function loadImages(){
 
 try{
-
 const res=await fetch("data/images.json")
 images=await res.json()
-
 }catch{
-
 images=[]
-
 }
 
 display()
@@ -256,12 +244,10 @@ grid.appendChild(card)
 
 }
 
-/* FILE BUTTON UPLOAD */
+/* FILE BUTTON */
 
 document.getElementById("upload").addEventListener("change",(e)=>{
-
 addFiles(e.target.files)
-
 })
 
 /* DRAG DROP */
@@ -280,16 +266,46 @@ dropzone.classList.remove("dragover")
 dropzone.addEventListener("drop",(e)=>{
 
 e.preventDefault()
-
 dropzone.classList.remove("dragover")
 
 addFiles(e.dataTransfer.files)
 
 })
 
-function addFiles(files){
+/* UPLOAD TO GITHUB */
+
+async function addFiles(files){
 
 for(let file of files){
+
+const reader=new FileReader()
+
+reader.onload=async function(e){
+
+const base64=e.target.result.split(",")[1]
+
+await fetch("https://api.github.com/repos/YOUR_USERNAME/YOUR_REPO/dispatches",{
+
+method:"POST",
+
+headers:{
+"Accept":"application/vnd.github+json",
+"Authorization":"token YOUR_TOKEN"
+},
+
+body:JSON.stringify({
+
+event_type:"upload-file",
+
+client_payload:{
+folder:"images/uploads",
+filename:file.name,
+content:base64
+}
+
+})
+
+})
 
 images.push({
 
@@ -300,9 +316,13 @@ keywords:""
 
 })
 
+display()
+
 }
 
-display()
+reader.readAsDataURL(file)
+
+}
 
 }
 
