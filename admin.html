@@ -4,7 +4,6 @@
 <head>
 
 <meta charset="UTF-8">
-
 <title>Portfolio Admin</title>
 
 <style>
@@ -24,9 +23,19 @@ padding:40px;
 
 .dropzone{
 border:3px dashed white;
-padding:60px;
+padding:80px;
 text-align:center;
-margin-bottom:30px;
+font-size:22px;
+cursor:pointer;
+}
+
+.dropzone.drag{
+background:rgba(255,255,255,.2);
+}
+
+.status{
+margin-top:20px;
+font-size:18px;
 }
 
 </style>
@@ -40,53 +49,72 @@ margin-bottom:30px;
 <h1>Upload Photos</h1>
 
 <div class="dropzone" id="dropzone">
-
 Drag Photos Here
-
 </div>
+
+<div class="status" id="status"></div>
 
 </div>
 
 <script>
 
-const dropzone=document.getElementById("dropzone")
+const dropzone = document.getElementById("dropzone")
+const status = document.getElementById("status")
 
-dropzone.addEventListener("dragover",(e)=>{
+/* HIGHLIGHT BOX */
 
+dropzone.addEventListener("dragover", (e)=>{
 e.preventDefault()
-
+dropzone.classList.add("drag")
 })
 
-dropzone.addEventListener("drop",(e)=>{
+dropzone.addEventListener("dragleave", ()=>{
+dropzone.classList.remove("drag")
+})
+
+/* DROP FILES */
+
+dropzone.addEventListener("drop", (e)=>{
 
 e.preventDefault()
 
-const files=e.dataTransfer.files
+dropzone.classList.remove("drag")
+
+const files = e.dataTransfer.files
+
+if(files.length === 0){
+status.innerText="No files detected"
+return
+}
+
+status.innerText = "Uploading..."
 
 upload(files)
 
 })
 
+/* UPLOAD FUNCTION */
+
 async function upload(files){
 
 for(let file of files){
 
-const reader=new FileReader()
+const reader = new FileReader()
 
-reader.onload=async function(e){
+reader.onload = async function(e){
 
-const base64=e.target.result.split(",")[1]
+const base64 = e.target.result.split(",")[1]
+
+try{
 
 await fetch("https://api.github.com/repos/JB-code-bit/Xander-Heredia-Leon/dispatches",{
 
 method:"POST",
 
 headers:{
-
 "Accept":"application/vnd.github+json",
-
-"Content-Type":"application/json"
-
+"Content-Type":"application/json",
+"User-Agent":"portfolio-admin"
 },
 
 body:JSON.stringify({
@@ -94,18 +122,22 @@ body:JSON.stringify({
 event_type:"upload-file",
 
 client_payload:{
-
 folder:"images/uploads",
-
 filename:file.name,
-
 content:base64
-
 }
 
 })
 
 })
+
+status.innerText="Upload sent to GitHub Actions"
+
+}catch(err){
+
+status.innerText="Upload failed"
+
+}
 
 }
 
