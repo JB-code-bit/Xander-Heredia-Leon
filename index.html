@@ -52,7 +52,7 @@ position:relative;
 color:white;
 }
 
-/* DARK OVERLAY */
+/* OVERLAY */
 
 .hero::before{
 content:"";
@@ -75,7 +75,7 @@ position:relative;
 z-index:2;
 }
 
-/* SCROLL CONTROLS */
+/* SCROLL BUTTONS */
 
 .controls{
 display:flex;
@@ -101,15 +101,34 @@ display:flex;
 gap:80px;
 overflow-x:auto;
 
-padding:120px 80px 40px 80px;
+padding:140px 80px 40px 80px;
 
 scroll-behavior:smooth;
 
 }
 
-/* ROPE (BEHIND EVERYTHING) */
+/* ROPE BACKING STRIP */
 
 .gallery::before{
+
+content:"";
+position:absolute;
+
+top:70px;
+left:0;
+
+width:100%;
+height:54px;
+
+background:#2b2b2b;
+
+z-index:1;
+
+}
+
+/* ROPE IMAGE */
+
+.gallery::after{
 
 content:"";
 position:absolute;
@@ -124,18 +143,18 @@ background-image:url("images/images/landing/12Z_2103.w011.n001.500A.p15.500.jpg"
 background-repeat:repeat-x;
 background-size:auto 54px;
 
-z-index:1;
+z-index:2;
 
 }
 
-/* PHOTO HOLDER */
+/* PHOTO */
 
 .photo{
 position:relative;
-z-index:2;
+z-index:3;
 }
 
-/* EMPTY POLAROID */
+/* POLAROID PLACEHOLDER */
 
 .placeholder{
 
@@ -163,7 +182,7 @@ transform:translateX(-50%);
 
 width:40px;
 
-z-index:3;
+z-index:4;
 
 }
 
@@ -204,9 +223,9 @@ transform:rotate(2deg);
 
 <script>
 
-/* CREATE 200 EMPTY POLAROID SLOTS */
-
 const gallery = document.getElementById("gallery")
+
+/* CREATE 200 EMPTY POLAROID SLOTS */
 
 for(let i=0;i<200;i++){
 
@@ -245,7 +264,7 @@ gallery.addEventListener("wheel",()=>auto=false)
 gallery.addEventListener("mouseenter",()=>auto=false)
 gallery.addEventListener("touchstart",()=>auto=false)
 
-/* BUTTON CONTROLS */
+/* BUTTON SCROLL */
 
 function scrollLeft(){
 auto=false
