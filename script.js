@@ -10,35 +10,42 @@ const categories = [
 "shirtless"
 ]
 
+/* ONLY SHOW VISIBLE IMAGES */
+
+let visibleImages = images.filter(img => img.visible !== false)
+
+/* ORDER BY CATEGORY */
+
 let orderedImages = []
 
 categories.forEach(cat=>{
-images.forEach(img=>{
-if(img.category===cat){
+visibleImages.forEach(img=>{
+if(img.category === cat){
 orderedImages.push(img)
 }
 })
 })
 
+/* BUILD GALLERY */
+
 for(let i=0;i<200;i++){
 
-const photo=document.createElement("div")
+const photo = document.createElement("div")
+photo.className = "photo"
 
-photo.className="photo"
-
-let imgHTML=""
+let imgHTML = ""
 
 if(orderedImages[i]){
 
-imgHTML=`<img src="${orderedImages[i].src}" class="polaroid">`
+imgHTML = `<img src="${orderedImages[i].src}" class="polaroid">`
 
 }else{
 
-imgHTML=`<div class="polaroid"></div>`
+imgHTML = `<div class="polaroid"></div>`
 
 }
 
-photo.innerHTML=`
+photo.innerHTML = `
 
 ${imgHTML}
 
