@@ -95,41 +95,28 @@ cursor:pointer;
 /* ROPE */
 
 .rope{
-
 position:absolute;
 top:260px;
 left:0;
-
 width:100%;
 height:30px;
-
 background-image:url("images/images/landing/12Z_2103.w011.n001.500A.p15.500.jpg");
-
 background-repeat:repeat-x;
 background-size:auto 30px;
-
 z-index:2;
 pointer-events:none;
-
 }
 
 /* GALLERY */
 
 .gallery{
-
 display:flex;
 gap:80px;
-
 overflow-x:auto;
-
 width:100%;
-
 padding:140px 80px;
-
 scroll-behavior:smooth;
-
 z-index:3;
-
 }
 
 .gallery::-webkit-scrollbar{
@@ -141,15 +128,6 @@ display:none;
 .photo{
 position:relative;
 flex-shrink:0;
-animation:swing 6s ease-in-out infinite;
-}
-
-@keyframes swing{
-
-0%{ transform:rotate(-3deg); }
-50%{ transform:rotate(1deg); }
-100%{ transform:rotate(-3deg); }
-
 }
 
 /* POLAROID FRAME */
@@ -242,45 +220,6 @@ filter:blur(2px) contrast(0.7);
 
 }
 
-/* LIGHT SWEEP */
-
-.polaroid::after{
-
-content:"";
-
-position:absolute;
-
-top:-100%;
-left:-50%;
-
-width:200%;
-height:200%;
-
-background:linear-gradient(
-120deg,
-transparent,
-rgba(255,255,255,0.25),
-transparent
-);
-
-transform:rotate(25deg);
-
-animation:lightSweep 8s linear infinite;
-
-}
-
-@keyframes lightSweep{
-
-0%{
-transform:translateX(-100%) rotate(25deg);
-}
-
-100%{
-transform:translateX(100%) rotate(25deg);
-}
-
-}
-
 /* PIN */
 
 .pin{
@@ -329,13 +268,46 @@ z-index:6;
 
 const gallery=document.getElementById("gallery")
 
-/* CREATE 200 POLAROIDS */
+/* CREATE 200 POLAROIDS WITH RANDOM SWING */
 
 for(let i=0;i<200;i++){
 
 const photo=document.createElement("div")
 
 photo.className="photo"
+
+/* RANDOM ROTATION */
+let rotation=(Math.random()*6)-3
+
+/* RANDOM SWING SPEED */
+let swingSpeed=5 + Math.random()*4
+
+/* RANDOM SWING ANGLE */
+let swingAngle=1 + Math.random()*3
+
+photo.style.transform=`rotate(${rotation}deg)`
+
+photo.style.animation=`swing${i} ${swingSpeed}s ease-in-out infinite`
+
+/* CREATE UNIQUE SWING ANIMATION */
+
+const style=document.createElement("style")
+
+style.innerHTML=`
+
+@keyframes swing${i}{
+
+0%{ transform:rotate(${rotation}deg); }
+
+50%{ transform:rotate(${rotation + swingAngle}deg); }
+
+100%{ transform:rotate(${rotation}deg); }
+
+}
+
+`
+
+document.head.appendChild(style)
 
 photo.innerHTML=`
 
@@ -359,9 +331,9 @@ let auto=true
 
 function autoScroll(){
 
-if(!auto) return
-
-gallery.scrollLeft += 0.5
+if(auto){
+gallery.scrollLeft += 1.2
+}
 
 requestAnimationFrame(autoScroll)
 
@@ -369,22 +341,16 @@ requestAnimationFrame(autoScroll)
 
 autoScroll()
 
-/* STOP AUTO WHEN USER INTERACTS */
-
-gallery.addEventListener("wheel",()=>auto=false)
-gallery.addEventListener("mouseenter",()=>auto=false)
-gallery.addEventListener("touchstart",()=>auto=false)
-
-/* BUTTON SCROLL */
+/* BUTTON SCROLL (STOPS AUTO) */
 
 function scrollLeft(){
 auto=false
-gallery.scrollLeft -= 600
+gallery.scrollLeft -= 800
 }
 
 function scrollRight(){
 auto=false
-gallery.scrollLeft += 600
+gallery.scrollLeft += 800
 }
 
 </script>
