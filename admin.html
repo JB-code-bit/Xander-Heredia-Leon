@@ -13,13 +13,14 @@ font-family:Arial;
 background:#111;
 color:white;
 text-align:center;
-padding:50px;
+padding:40px;
 
 }
 
-input{
+select,input{
 
-margin:20px;
+margin:15px;
+padding:8px;
 
 }
 
@@ -47,18 +48,29 @@ border:4px solid white;
 
 <h1>Upload Portfolio Photos</h1>
 
+<select id="category">
+
+<option value="headshot">Headshot</option>
+<option value="waistup">Waist Up</option>
+<option value="posing">Posing</option>
+<option value="fullbody">Full Body</option>
+<option value="shirtless">Shirtless</option>
+
+</select>
+
 <input type="file" id="upload" multiple>
 
 <div class="preview" id="preview"></div>
 
 <script>
 
-const upload=document.getElementById("upload")
-const preview=document.getElementById("preview")
+let images=JSON.parse(localStorage.getItem("portfolioImages"))||[]
 
-let images=JSON.parse(localStorage.getItem("portfolioImages")) || []
+const upload=document.getElementById("upload")
 
 upload.addEventListener("change",function(){
+
+const cat=document.getElementById("category").value
 
 const files=this.files
 
@@ -68,11 +80,15 @@ const reader=new FileReader()
 
 reader.onload=function(e){
 
-images.push(e.target.result)
+images.push({
+
+src:e.target.result,
+
+category:cat
+
+})
 
 localStorage.setItem("portfolioImages",JSON.stringify(images))
-
-displayImages()
 
 }
 
@@ -81,24 +97,6 @@ reader.readAsDataURL(file)
 }
 
 })
-
-function displayImages(){
-
-preview.innerHTML=""
-
-images.forEach(img=>{
-
-const image=document.createElement("img")
-
-image.src=img
-
-preview.appendChild(image)
-
-})
-
-}
-
-displayImages()
 
 </script>
 
