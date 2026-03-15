@@ -10,15 +10,17 @@ text-align:center;
 
 color:white;
 
+overflow-x:hidden;
+
 }
 
 /* TITLE */
 
 h1{
 
-margin-top:120px;
+margin-top:150px;
 
-font-size:60px;
+font-size:70px;
 
 }
 
@@ -28,15 +30,17 @@ font-size:60px;
 
 position:absolute;
 
-top:220px;
+top:260px;
 
 width:100%;
 
-height:30px;
+height:32px;
 
 background:url("images/12Z_2103.w011.n001.500A.p15.500.jpg") repeat-x;
 
-background-size:auto 30px;
+background-size:auto 32px;
+
+z-index:1;
 
 }
 
@@ -50,7 +54,13 @@ gap:80px;
 
 overflow-x:auto;
 
-padding:120px 80px;
+padding:160px 80px;
+
+scroll-behavior:smooth;
+
+position:relative;
+
+z-index:2;
 
 }
 
@@ -62,15 +72,17 @@ position:relative;
 
 }
 
-/* IMAGE */
+/* POLAROID */
 
-.photo img{
+.photo img:first-child{
 
-width:220px;
+width:240px;
 
 border:10px solid white;
 
 background:black;
+
+box-shadow:0 20px 40px rgba(0,0,0,.6);
 
 }
 
@@ -86,6 +98,22 @@ left:50%;
 
 transform:translateX(-50%);
 
-width:30px;
+width:34px;
+
+z-index:3;
+
+}
+
+/* RANDOM ROTATION */
+
+.photo:nth-child(odd){
+
+transform:rotate(-3deg);
+
+}
+
+.photo:nth-child(even){
+
+transform:rotate(3deg);
 
 }
