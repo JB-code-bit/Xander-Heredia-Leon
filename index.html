@@ -268,12 +268,11 @@ z-index:6;
 
 const gallery=document.getElementById("gallery")
 
-/* CREATE 200 POLAROIDS WITH RANDOM SWING */
+/* CREATE 200 POLAROIDS */
 
 for(let i=0;i<200;i++){
 
 const photo=document.createElement("div")
-
 photo.className="photo"
 
 let rotation=(Math.random()*6)-3
@@ -288,11 +287,9 @@ const style=document.createElement("style")
 style.innerHTML=`
 
 @keyframes swing${i}{
-
 0%{ transform:rotate(${rotation}deg); }
 50%{ transform:rotate(${rotation + swingAngle}deg); }
 100%{ transform:rotate(${rotation}deg); }
-
 }
 
 `
@@ -313,28 +310,33 @@ gallery.appendChild(photo)
 
 }
 
-/* AUTO SCROLL */
+/* ULTRA SMOOTH AUTO SCROLL */
 
 let auto=true
+let lastTime=0
+let speed=0.18
 
-function autoScroll(){
+function autoScroll(time){
+
+if(!lastTime) lastTime=time
+let delta=time-lastTime
+lastTime=time
 
 if(auto){
-gallery.scrollLeft += 3.3
+gallery.scrollLeft += delta*speed
 }
 
 requestAnimationFrame(autoScroll)
 
 }
 
-autoScroll()
+requestAnimationFrame(autoScroll)
 
 /* SMOOTH MANUAL SCROLL */
 
 function smoothScroll(distance){
 
 let start=gallery.scrollLeft
-let target=start+distance
 let duration=700
 let startTime=null
 
@@ -355,8 +357,6 @@ requestAnimationFrame(animation)
 requestAnimationFrame(animation)
 
 }
-
-/* BUTTON SCROLL */
 
 function scrollLeft(){
 auto=false
