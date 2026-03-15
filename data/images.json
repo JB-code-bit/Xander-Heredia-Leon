@@ -1,1 +1,6 @@
-[]
+[
+  {
+    "src": "images/sample.jpg",
+    "category": "headshot"
+  }
+]
