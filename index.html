@@ -1,26 +1,85 @@
-<!DOCTYPE html>
-<html>
+const gallery=document.getElementById("gallery")
 
-<head>
+let images=JSON.parse(localStorage.getItem("portfolioImages"))||[]
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+const categories=[
 
-<title>Xander Heredia-Leon</title>
+"headshot",
+"waistup",
+"posing",
+"fullbody",
+"shirtless"
 
-<link rel="stylesheet" href="style.css">
+]
 
-</head>
+let orderedImages=[]
 
-<body>
+categories.forEach(cat=>{
 
-<h1>Xander Heredia-Leon</h1>
+images.forEach(img=>{
 
-<div class="rope"></div>
+if(img.category===cat){
 
-<div class="gallery" id="gallery"></div>
+orderedImages.push(img)
 
-<script src="script.js"></script>
+}
 
-</body>
-</html>
+})
+
+})
+
+for(let i=0;i<200;i++){
+
+const photo=document.createElement("div")
+
+photo.className="photo"
+
+let imgHTML=""
+
+if(orderedImages[i]){
+
+imgHTML=`<img src="${orderedImages[i].src}" class="polaroid">`
+
+}else{
+
+imgHTML=`<div class="polaroid"></div>`
+
+}
+
+photo.innerHTML=`
+
+${imgHTML}
+
+<img class="pin" src="images/Adobe Express - file.png">
+
+`
+
+gallery.appendChild(photo)
+
+}
+
+/* CLICK EFFECT */
+
+document.querySelectorAll(".photo").forEach(photo=>{
+
+photo.addEventListener("click",()=>{
+
+document.querySelectorAll(".photo").forEach(p=>p.classList.remove("active"))
+
+photo.classList.add("active")
+
+})
+
+})
+
+/* AUTO SCROLL */
+
+function autoScroll(){
+
+gallery.scrollLeft+=0.8
+
+requestAnimationFrame(autoScroll)
+
+}
+
+autoScroll()
