@@ -1,1 +1,91 @@
+body{
 
+margin:0;
+
+background:url("images/grass.jpg") center/cover no-repeat;
+
+font-family:Arial;
+
+text-align:center;
+
+color:white;
+
+}
+
+/* TITLE */
+
+h1{
+
+margin-top:120px;
+
+font-size:60px;
+
+}
+
+/* ROPE */
+
+.rope{
+
+position:absolute;
+
+top:220px;
+
+width:100%;
+
+height:30px;
+
+background:url("images/rope.png") repeat-x;
+
+background-size:auto 30px;
+
+}
+
+/* GALLERY */
+
+.gallery{
+
+display:flex;
+
+gap:80px;
+
+overflow-x:auto;
+
+padding:120px 80px;
+
+}
+
+/* PHOTO */
+
+.photo{
+
+position:relative;
+
+}
+
+/* IMAGE */
+
+.photo img{
+
+width:220px;
+
+border:10px solid white;
+
+background:black;
+
+}
+
+/* PIN */
+
+.pin{
+
+position:absolute;
+
+top:-18px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+width:30px;
+
+}
