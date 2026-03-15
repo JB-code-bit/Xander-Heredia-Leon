@@ -92,13 +92,14 @@ color:black;
 cursor:pointer;
 }
 
-/* FIXED ROPE */
+/* ROPE */
 
 .rope{
 
 position:absolute;
 
-top:240px;
+top:260px;
+
 left:0;
 
 width:100%;
@@ -117,11 +118,9 @@ pointer-events:none;
 
 }
 
-/* GALLERY (SCROLLS) */
+/* SCROLL AREA */
 
 .gallery{
-
-position:relative;
 
 display:flex;
 
@@ -129,19 +128,27 @@ gap:80px;
 
 overflow-x:auto;
 
-padding:140px 80px 80px 80px;
+width:100%;
 
-scroll-behavior:smooth;
+padding:140px 80px;
 
 z-index:2;
 
+scroll-behavior:smooth;
+
+}
+
+/* HIDE SCROLLBAR */
+
+.gallery::-webkit-scrollbar{
+display:none;
 }
 
 /* PHOTO */
 
 .photo{
 position:relative;
-z-index:2;
+flex-shrink:0;
 }
 
 /* POLAROID */
@@ -170,7 +177,7 @@ transform:translateX(-50%);
 
 width:32px;
 
-z-index:4;
+z-index:5;
 
 }
 
@@ -215,7 +222,7 @@ transform:rotate(2deg);
 
 const gallery=document.getElementById("gallery")
 
-/* CREATE 200 POLAROID SLOTS */
+/* CREATE 200 POLAROIDS */
 
 for(let i=0;i<200;i++){
 
@@ -240,7 +247,7 @@ function autoScroll(){
 
 if(!auto) return
 
-gallery.scrollLeft+=0.4
+gallery.scrollLeft += 0.5
 
 requestAnimationFrame(autoScroll)
 
@@ -248,22 +255,22 @@ requestAnimationFrame(autoScroll)
 
 autoScroll()
 
-/* STOP AUTO WHEN USER INTERACTS */
+/* STOP AUTO ON USER INTERACTION */
 
 gallery.addEventListener("wheel",()=>auto=false)
 gallery.addEventListener("mouseenter",()=>auto=false)
 gallery.addEventListener("touchstart",()=>auto=false)
 
-/* BUTTON SCROLL */
+/* BUTTON CONTROLS */
 
 function scrollLeft(){
 auto=false
-gallery.scrollLeft-=600
+gallery.scrollLeft -= 600
 }
 
 function scrollRight(){
 auto=false
-gallery.scrollLeft+=600
+gallery.scrollLeft += 600
 }
 
 </script>
