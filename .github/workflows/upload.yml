@@ -4,6 +4,9 @@ on:
   repository_dispatch:
     types: [upload-file]
 
+permissions:
+  contents: write
+
 jobs:
   upload:
     runs-on: ubuntu-latest
@@ -12,6 +15,8 @@ jobs:
 
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_UPLOAD_TOKEN }}
 
       - name: Save file
         run: |
