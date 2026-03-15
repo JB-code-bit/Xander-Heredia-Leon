@@ -1,14 +1,28 @@
-const gallery = document.getElementById("gallery")
+const gallery=document.getElementById("gallery")
+
+let images=JSON.parse(localStorage.getItem("portfolioImages")) || []
 
 for(let i=0;i<200;i++){
 
-const photo = document.createElement("div")
+const photo=document.createElement("div")
 
 photo.className="photo"
 
+let imgHTML=""
+
+if(images[i]){
+
+imgHTML=`<img src="${images[i]}" class="polaroid">`
+
+}else{
+
+imgHTML=`<div class="polaroid"></div>`
+
+}
+
 photo.innerHTML=`
 
-<div class="polaroid"></div>
+${imgHTML}
 
 <img class="pin" src="images/Adobe Express - file.png">
 
@@ -34,40 +48,12 @@ photo.classList.add("active")
 
 /* AUTO SCROLL */
 
-let autoScrollSpeed=.8
-
 function autoScroll(){
 
-gallery.scrollLeft+=autoScrollSpeed
+gallery.scrollLeft+=.8
 
 requestAnimationFrame(autoScroll)
 
 }
 
 autoScroll()
-
-/* MANUAL CONTROLS */
-
-function scrollLeft(){
-
-gallery.scrollBy({
-
-left:-600,
-
-behavior:"smooth"
-
-})
-
-}
-
-function scrollRight(){
-
-gallery.scrollBy({
-
-left:600,
-
-behavior:"smooth"
-
-})
-
-}
