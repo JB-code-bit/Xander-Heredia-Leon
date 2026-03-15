@@ -1,14 +1,14 @@
-const gallery=document.getElementById("gallery")
+const gallery = document.getElementById("gallery")
 
 for(let i=0;i<200;i++){
 
-const photo=document.createElement("div")
+const photo = document.createElement("div")
 
-photo.className="photo"
+photo.className = "photo"
 
-photo.innerHTML=`
+photo.innerHTML = `
 
-<img src="">
+<div class="polaroid"></div>
 
 <img class="pin" src="images/Adobe Express - file.png">
 
