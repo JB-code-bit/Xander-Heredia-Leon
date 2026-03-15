@@ -1,6 +1,9 @@
 const gallery = document.getElementById("gallery")
 
-let images = JSON.parse(localStorage.getItem("portfolioImages")) || []
+async function loadImages(){
+
+const response = await fetch("data/images.json")
+const images = await response.json()
 
 const categories = [
 "headshot",
@@ -10,42 +13,34 @@ const categories = [
 "shirtless"
 ]
 
-/* ONLY SHOW VISIBLE IMAGES */
-
-let visibleImages = images.filter(img => img.visible !== false)
-
-/* ORDER BY CATEGORY */
-
-let orderedImages = []
+let orderedImages=[]
 
 categories.forEach(cat=>{
-visibleImages.forEach(img=>{
-if(img.category === cat){
+images.forEach(img=>{
+if(img.category===cat && img.visible){
 orderedImages.push(img)
 }
 })
 })
 
-/* BUILD GALLERY */
-
 for(let i=0;i<200;i++){
 
-const photo = document.createElement("div")
-photo.className = "photo"
+const photo=document.createElement("div")
+photo.className="photo"
 
-let imgHTML = ""
+let imgHTML=""
 
 if(orderedImages[i]){
 
-imgHTML = `<img src="${orderedImages[i].src}" class="polaroid">`
+imgHTML=`<img src="${orderedImages[i].src}" class="polaroid">`
 
 }else{
 
-imgHTML = `<div class="polaroid"></div>`
+imgHTML=`<div class="polaroid"></div>`
 
 }
 
-photo.innerHTML = `
+photo.innerHTML=`
 
 ${imgHTML}
 
@@ -76,22 +71,12 @@ photo.classList.add("active")
 function autoScroll(){
 
 gallery.scrollLeft += 0.8
-
 requestAnimationFrame(autoScroll)
 
 }
 
 autoScroll()
 
-/* CATEGORY JUMP */
-
-function jump(position){
-
-gallery.scrollTo({
-
-left: position * 350,
-behavior: "smooth"
-
-})
-
 }
+
+loadImages()
