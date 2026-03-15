@@ -52,7 +52,7 @@ position:relative;
 color:white;
 }
 
-/* DARK OVERLAY */
+/* OVERLAY */
 
 .hero::before{
 content:"";
@@ -75,7 +75,7 @@ position:relative;
 z-index:2;
 }
 
-/* CONTROLS */
+/* SCROLL BUTTONS */
 
 .controls{
 display:flex;
@@ -92,30 +92,18 @@ color:black;
 cursor:pointer;
 }
 
-/* GALLERY CONTAINER */
-
-.gallery-wrapper{
-position:relative;
-width:100%;
-overflow:hidden;
-}
-
-/* ROPE LAYER */
+/* ROPE (3x BIGGER) */
 
 .rope{
 
 position:absolute;
-top:0;
+top:215px;
 left:0;
+
 width:100%;
-height:30px;
+height:54px; /* 3x bigger */
 
-background-color:rgba(0,0,0,0.4);
-
-background-image:url("images/images/landing/12Z_2103.w011.n001.500A.p15.500.jpg");
-background-repeat:repeat-x;
-background-size:auto 18px;
-background-position:center;
+background:url("images/images/landing/12Z_2103.w011.n001.500A.p15.500.jpg") center/contain no-repeat;
 
 z-index:3;
 }
@@ -152,10 +140,10 @@ box-shadow:0 20px 40px rgba(0,0,0,0.6);
 
 .pin{
 position:absolute;
-top:-6px;
+top:-15px;
 left:50%;
 transform:translateX(-50%);
-width:32px;
+width:40px;
 z-index:5;
 }
 
@@ -190,13 +178,9 @@ transform:rotate(2deg);
 <button onclick="scrollRight()">▶</button>
 </div>
 
-<div class="gallery-wrapper">
-
 <div class="rope"></div>
 
 <div class="gallery" id="gallery"></div>
-
-</div>
 
 </section>
 
@@ -208,7 +192,8 @@ const gallery = document.getElementById("gallery")
 
 for(let i=0;i<200;i++){
 
-const photo = document.createElement("div")
+const photo=document.createElement("div")
+
 photo.className="photo"
 
 photo.innerHTML=`
@@ -228,7 +213,7 @@ function autoScroll(){
 
 if(!auto) return
 
-gallery.scrollLeft += 0.4
+gallery.scrollLeft+=0.4
 
 requestAnimationFrame(autoScroll)
 
@@ -242,16 +227,16 @@ gallery.addEventListener("wheel",()=>auto=false)
 gallery.addEventListener("mouseenter",()=>auto=false)
 gallery.addEventListener("touchstart",()=>auto=false)
 
-/* BUTTON CONTROLS */
+/* BUTTON SCROLL */
 
 function scrollLeft(){
 auto=false
-gallery.scrollLeft -= 600
+gallery.scrollLeft-=600
 }
 
 function scrollRight(){
 auto=false
-gallery.scrollLeft += 600
+gallery.scrollLeft+=600
 }
 
 </script>
