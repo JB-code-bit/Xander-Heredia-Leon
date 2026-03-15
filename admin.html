@@ -5,7 +5,7 @@
 <head>
 
 <meta charset="UTF-8">
-<title>Portfolio Admin</title>
+<title>Portfolio Manager</title>
 
 <style>
 
@@ -17,60 +17,15 @@ text-align:center;
 padding:40px;
 }
 
-h1{
-margin-bottom:20px;
-}
-
-select,input{
-padding:8px;
-margin:6px;
-}
-
 .dropzone{
 width:500px;
-height:180px;
-margin:20px auto;
+height:200px;
+margin:auto;
 border:3px dashed white;
 display:flex;
 align-items:center;
 justify-content:center;
 font-size:18px;
-}
-
-.preview{
-display:flex;
-flex-wrap:wrap;
-gap:20px;
-justify-content:center;
-margin-top:30px;
-}
-
-.card{
-border:2px solid white;
-padding:10px;
-width:160px;
-background:#222;
-}
-
-.card img{
-width:100%;
-height:160px;
-object-fit:cover;
-border:3px solid white;
-margin-bottom:6px;
-}
-
-.card button{
-margin:4px;
-padding:6px;
-cursor:pointer;
-}
-
-.download{
-margin-top:30px;
-padding:10px 18px;
-font-size:16px;
-cursor:pointer;
 }
 
 </style>
@@ -81,188 +36,15 @@ cursor:pointer;
 
 <h1>Portfolio Manager</h1>
 
-<select id="category">
+<input type="file" id="files" multiple>
 
-<option value="headshot">Headshot</option>
-<option value="waistup">Waist Up</option>
-<option value="posing">Posing</option>
-<option value="fullbody">Full Body</option>
-<option value="shirtless">Shirtless</option>
+<p>After selecting photos upload them to:</p>
 
-</select>
+<pre>
+images/uploads
+</pre>
 
-<div id="dropzone" class="dropzone">
-Drag Photos Here
-</div>
-
-<div id="preview" class="preview"></div>
-
-<button class="download" onclick="downloadJSON()">
-Download Updated images.json
-</button>
-
-<script>
-
-let images=[]
-
-async function loadDB(){
-
-try{
-
-const response=await fetch("data/images.json")
-images=await response.json()
-
-}catch{
-
-images=[]
-
-}
-
-displayImages()
-
-}
-
-loadDB()
-
-const preview=document.getElementById("preview")
-
-function displayImages(){
-
-preview.innerHTML=""
-
-images.forEach((img,index)=>{
-
-const card=document.createElement("div")
-card.className="card"
-
-const image=document.createElement("img")
-image.src=img.src
-
-const cat=document.createElement("select")
-
-const categories=["headshot","waistup","posing","fullbody","shirtless"]
-
-categories.forEach(c=>{
-
-const option=document.createElement("option")
-
-option.value=c
-option.textContent=c
-
-if(img.category===c) option.selected=true
-
-cat.appendChild(option)
-
-})
-
-cat.onchange=()=>{
-
-images[index].category=cat.value
-
-}
-
-const keywords=document.createElement("input")
-
-keywords.placeholder="keywords"
-
-keywords.value=img.keywords || ""
-
-keywords.oninput=()=>{
-
-images[index].keywords=keywords.value
-
-}
-
-const toggle=document.createElement("button")
-
-toggle.textContent=img.visible ? "Visible" : "Hidden"
-
-toggle.onclick=()=>{
-
-images[index].visible=!images[index].visible
-
-displayImages()
-
-}
-
-const del=document.createElement("button")
-
-del.textContent="Delete"
-
-del.onclick=()=>{
-
-images.splice(index,1)
-
-displayImages()
-
-}
-
-card.appendChild(image)
-card.appendChild(cat)
-card.appendChild(keywords)
-card.appendChild(toggle)
-card.appendChild(del)
-
-preview.appendChild(card)
-
-})
-
-}
-
-/* DRAG UPLOAD */
-
-const dropzone=document.getElementById("dropzone")
-
-dropzone.addEventListener("dragover",(e)=>{
-
-e.preventDefault()
-
-})
-
-dropzone.addEventListener("drop",(e)=>{
-
-e.preventDefault()
-
-const files=e.dataTransfer.files
-
-const cat=document.getElementById("category").value
-
-for(let file of files){
-
-images.push({
-
-src:"images/uploads/"+file.name,
-category:cat,
-visible:true,
-keywords:""
-
-})
-
-}
-
-displayImages()
-
-})
-
-/* DOWNLOAD JSON */
-
-function downloadJSON(){
-
-const data=JSON.stringify(images,null,2)
-
-const blob=new Blob([data],{type:"application/json"})
-
-const link=document.createElement("a")
-
-link.href=URL.createObjectURL(blob)
-
-link.download="images.json"
-
-link.click()
-
-}
-
-</script>
+<p>Then run the GitHub upload action.</p>
 
 </body>
 
