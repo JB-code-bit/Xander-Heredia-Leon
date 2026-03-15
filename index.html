@@ -52,7 +52,7 @@ position:relative;
 color:white;
 }
 
-/* OVERLAY */
+/* DARK OVERLAY */
 
 .hero::before{
 content:"";
@@ -70,12 +70,12 @@ z-index:0;
 .hero h1{
 font-family:'Playfair Display', serif;
 font-size:72px;
-margin-bottom:80px;
+margin-bottom:40px;
 position:relative;
 z-index:2;
 }
 
-/* SCROLL BUTTONS */
+/* SCROLL CONTROLS */
 
 .controls{
 display:flex;
@@ -92,62 +92,82 @@ color:black;
 cursor:pointer;
 }
 
-/* ROPE (3x BIGGER) */
-
-.rope{
-
-position:absolute;
-top:215px;
-left:0;
-
-width:100%;
-height:54px; /* 3x bigger */
-
-background:url("images/images/landing/12Z_2103.w011.n001.500A.p15.500.jpg") center/contain no-repeat;
-
-z-index:3;
-}
-
 /* GALLERY */
 
 .gallery{
 
+position:relative;
 display:flex;
 gap:80px;
 overflow-x:auto;
-padding:40px 80px;
+
+padding:120px 80px 40px 80px;
+
 scroll-behavior:smooth;
 
 }
 
-/* PHOTO */
+/* ROPE (BEHIND EVERYTHING) */
+
+.gallery::before{
+
+content:"";
+position:absolute;
+
+top:70px;
+left:0;
+
+width:100%;
+height:54px;
+
+background-image:url("images/images/landing/12Z_2103.w011.n001.500A.p15.500.jpg");
+background-repeat:repeat-x;
+background-size:auto 54px;
+
+z-index:1;
+
+}
+
+/* PHOTO HOLDER */
 
 .photo{
 position:relative;
+z-index:2;
 }
 
-/* POLAROID */
+/* EMPTY POLAROID */
 
 .placeholder{
+
 width:250px;
 height:370px;
+
 background:black;
+
 margin-top:60px;
+
 box-shadow:0 20px 40px rgba(0,0,0,0.6);
+
 }
 
-/* PIN */
+/* CLOTHESPIN */
 
 .pin{
+
 position:absolute;
-top:-15px;
+
+top:20px;
 left:50%;
+
 transform:translateX(-50%);
+
 width:40px;
-z-index:5;
+
+z-index:3;
+
 }
 
-/* ROTATION */
+/* RANDOM ROTATION */
 
 .photo:nth-child(odd){
 transform:rotate(-3deg);
@@ -178,15 +198,13 @@ transform:rotate(2deg);
 <button onclick="scrollRight()">▶</button>
 </div>
 
-<div class="rope"></div>
-
 <div class="gallery" id="gallery"></div>
 
 </section>
 
 <script>
 
-/* CREATE 200 POLAROID SLOTS */
+/* CREATE 200 EMPTY POLAROID SLOTS */
 
 const gallery = document.getElementById("gallery")
 
@@ -227,7 +245,7 @@ gallery.addEventListener("wheel",()=>auto=false)
 gallery.addEventListener("mouseenter",()=>auto=false)
 gallery.addEventListener("touchstart",()=>auto=false)
 
-/* BUTTON SCROLL */
+/* BUTTON CONTROLS */
 
 function scrollLeft(){
 auto=false
