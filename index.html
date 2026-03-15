@@ -97,7 +97,6 @@ cursor:pointer;
 .rope{
 
 position:absolute;
-
 top:260px;
 left:0;
 
@@ -107,7 +106,6 @@ height:30px;
 background-image:url("images/images/landing/12Z_2103.w011.n001.500A.p15.500.jpg");
 
 background-repeat:repeat-x;
-
 background-size:auto 30px;
 
 z-index:2;
@@ -116,12 +114,11 @@ pointer-events:none;
 
 }
 
-/* SCROLL GALLERY */
+/* GALLERY */
 
 .gallery{
 
 display:flex;
-
 gap:80px;
 
 overflow-x:auto;
@@ -145,6 +142,17 @@ display:none;
 .photo{
 position:relative;
 flex-shrink:0;
+animation:swing 6s ease-in-out infinite;
+}
+
+/* SWING ANIMATION */
+
+@keyframes swing{
+
+0%{ transform:rotate(-3deg); }
+50%{ transform:rotate(1deg); }
+100%{ transform:rotate(-3deg); }
+
 }
 
 /* POLAROID FRAME */
@@ -158,7 +166,15 @@ background:white;
 
 padding:15px 15px 40px 15px;
 
-box-shadow:0 20px 40px rgba(0,0,0,0.6);
+box-shadow:
+0 10px 25px rgba(0,0,0,0.4),
+0 20px 45px rgba(0,0,0,0.3);
+
+border-radius:2px;
+
+position:relative;
+
+overflow:hidden;
 
 }
 
@@ -169,27 +185,89 @@ box-shadow:0 20px 40px rgba(0,0,0,0.6);
 width:100%;
 height:100%;
 
-background:black;
+background:radial-gradient(circle at center,#333,#000);
 
 display:flex;
 align-items:center;
 justify-content:center;
 
 color:white;
-font-size:12px;
+font-size:11px;
 letter-spacing:2px;
 
-animation:develop 6s infinite;
+opacity:0.1;
+
+animation:develop 6s ease-in-out infinite;
 
 }
 
+/* DEVELOP EFFECT */
+
 @keyframes develop{
 
-0%{background:black}
-40%{background:#111}
-60%{background:#222}
-80%{background:#333}
-100%{background:black}
+0%{
+opacity:0.05;
+filter:blur(3px) contrast(0.6);
+}
+
+30%{
+opacity:0.35;
+filter:blur(2px) contrast(0.8);
+}
+
+60%{
+opacity:0.65;
+filter:blur(1px) contrast(1);
+}
+
+80%{
+opacity:0.45;
+filter:blur(1.5px) contrast(0.9);
+}
+
+100%{
+opacity:0.15;
+filter:blur(3px) contrast(0.6);
+}
+
+}
+
+/* LIGHT SWEEP */
+
+.polaroid::after{
+
+content:"";
+
+position:absolute;
+
+top:-100%;
+left:-50%;
+
+width:200%;
+height:200%;
+
+background:linear-gradient(
+120deg,
+transparent,
+rgba(255,255,255,0.2),
+transparent
+);
+
+transform:rotate(25deg);
+
+animation:lightSweep 7s linear infinite;
+
+}
+
+@keyframes lightSweep{
+
+0%{
+transform:translateX(-100%) rotate(25deg);
+}
+
+100%{
+transform:translateX(100%) rotate(25deg);
+}
 
 }
 
@@ -208,16 +286,6 @@ width:32px;
 
 z-index:6;
 
-}
-
-/* ROTATION */
-
-.photo:nth-child(odd){
-transform:rotate(-3deg);
-}
-
-.photo:nth-child(even){
-transform:rotate(2deg);
 }
 
 </style>
