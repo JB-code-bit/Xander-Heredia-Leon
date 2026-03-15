@@ -1,14 +1,17 @@
-const gallery=document.getElementById("gallery")
+const gallery = document.getElementById("gallery")
 
-let images=[]
+let images = []
 
 async function load(){
 
-const res=await fetch("data/images.json")
+    try{
+        const res = await fetch("data/images.json")
+        images = await res.json()
+    }catch{
+        images=[]
+    }
 
-images=await res.json()
-
-display()
+    display()
 
 }
 
@@ -16,23 +19,25 @@ load()
 
 function display(){
 
-images.forEach(img=>{
+    gallery.innerHTML=""
 
-const photo=document.createElement("div")
+    images.forEach(img=>{
 
-photo.className="photo"
+        const photo=document.createElement("div")
 
-photo.innerHTML=`
+        photo.className="photo"
 
-<img src="${img.src}" class="polaroid">
+        photo.innerHTML=`
 
-<img class="pin" src="images/Adobe Express - file.png">
+        <img src="${img.src}" class="polaroid">
 
-`
+        <img class="pin" src="images/Adobe Express - file.png">
 
-gallery.appendChild(photo)
+        `
 
-})
+        gallery.appendChild(photo)
+
+    })
 
 }
 
@@ -40,9 +45,9 @@ gallery.appendChild(photo)
 
 function autoScroll(){
 
-gallery.scrollLeft+=0.5
+    gallery.scrollLeft += 0.5
 
-requestAnimationFrame(autoScroll)
+    requestAnimationFrame(autoScroll)
 
 }
 
