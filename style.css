@@ -64,7 +64,7 @@ z-index:2;
 
 }
 
-/* PHOTO */
+/* PHOTO HOLDER */
 
 .photo{
 
@@ -72,15 +72,17 @@ position:relative;
 
 }
 
-/* POLAROID */
+/* POLAROID PLACEHOLDER */
 
-.photo img:first-child{
+.polaroid{
 
 width:240px;
 
-border:10px solid white;
+height:320px;
 
 background:black;
+
+border:10px solid white;
 
 box-shadow:0 20px 40px rgba(0,0,0,.6);
 
