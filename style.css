@@ -28,6 +28,7 @@ width:100%;
 height:18px;
 
 background:url("images/12Z_2103.w011.n001.500A.p15.500.jpg") repeat-x;
+
 z-index:1;
 
 }
@@ -53,8 +54,37 @@ z-index:2;
 .photo{
 
 position:relative;
+animation:swing 4s ease-in-out infinite;
 
 }
+
+/* RANDOM ANGLES */
+
+.photo:nth-child(odd){
+
+transform:rotate(-3deg);
+
+}
+
+.photo:nth-child(even){
+
+transform:rotate(3deg);
+
+}
+
+.photo:nth-child(3n){
+
+transform:rotate(-6deg);
+
+}
+
+.photo:nth-child(4n){
+
+transform:rotate(6deg);
+
+}
+
+/* POLAROID */
 
 .polaroid{
 
@@ -74,11 +104,13 @@ box-shadow:0 10px 20px rgba(0,0,0,.6);
 
 }
 
+/* PIN */
+
 .pin{
 
 position:absolute;
 
-top:-14px;
+top:-16px;
 left:50%;
 
 transform:translateX(-50%);
@@ -86,5 +118,17 @@ transform:translateX(-50%);
 width:34px;
 
 z-index:3;
+
+}
+
+/* SWING ANIMATION */
+
+@keyframes swing{
+
+0%{ transform:rotate(-2deg); }
+
+50%{ transform:rotate(2deg); }
+
+100%{ transform:rotate(-2deg); }
 
 }
