@@ -52,7 +52,7 @@ position:relative;
 color:white;
 }
 
-/* OVERLAY */
+/* DARK OVERLAY */
 
 .hero::before{
 content:"";
@@ -65,14 +65,14 @@ background:rgba(0,0,0,0.35);
 z-index:0;
 }
 
-/* NAME */
+/* TITLE */
 
 .hero h1{
 font-family:'Playfair Display', serif;
 font-size:72px;
 margin-bottom:40px;
 position:relative;
-z-index:3;
+z-index:5;
 }
 
 /* SCROLL BUTTONS */
@@ -81,7 +81,7 @@ z-index:3;
 display:flex;
 gap:20px;
 margin-bottom:20px;
-z-index:3;
+z-index:5;
 }
 
 .controls button{
@@ -99,26 +99,24 @@ cursor:pointer;
 position:absolute;
 
 top:260px;
-
 left:0;
 
 width:100%;
+height:30px;
 
-height:27px;
-
-background-image:url("images/images/landing/12Z_2103.w011.n001.500A.p15.500.png");
+background-image:url("images/images/landing/12Z_2103.w011.n001.500A.p15.500.jpg");
 
 background-repeat:repeat-x;
 
-background-size:auto 27px;
+background-size:auto 30px;
 
-z-index:1;
+z-index:2;
 
 pointer-events:none;
 
 }
 
-/* SCROLL AREA */
+/* SCROLL GALLERY */
 
 .gallery{
 
@@ -132,13 +130,11 @@ width:100%;
 
 padding:140px 80px;
 
-z-index:2;
-
 scroll-behavior:smooth;
 
-}
+z-index:3;
 
-/* HIDE SCROLLBAR */
+}
 
 .gallery::-webkit-scrollbar{
 display:none;
@@ -151,33 +147,66 @@ position:relative;
 flex-shrink:0;
 }
 
-/* POLAROID */
+/* POLAROID FRAME */
 
-.placeholder{
+.polaroid{
 
 width:250px;
 height:370px;
 
-background:black;
+background:white;
+
+padding:15px 15px 40px 15px;
 
 box-shadow:0 20px 40px rgba(0,0,0,0.6);
 
 }
 
-/* PIN */
+/* DEVELOPING PHOTO */
+
+.placeholder{
+
+width:100%;
+height:100%;
+
+background:black;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+color:white;
+font-size:12px;
+letter-spacing:2px;
+
+animation:develop 6s infinite;
+
+}
+
+@keyframes develop{
+
+0%{background:black}
+40%{background:#111}
+60%{background:#222}
+80%{background:#333}
+100%{background:black}
+
+}
+
+/* CLOTHESPIN */
 
 .pin{
 
 position:absolute;
 
-top:-30px;
+top:-35px;
 left:50%;
 
 transform:translateX(-50%);
 
 width:32px;
 
-z-index:5;
+z-index:6;
 
 }
 
@@ -231,8 +260,17 @@ const photo=document.createElement("div")
 photo.className="photo"
 
 photo.innerHTML=`
-<div class="placeholder"></div>
+
+<div class="polaroid">
+
+<div class="placeholder">
+Developing...
+</div>
+
+</div>
+
 <img class="pin" src="images/images/landing/Adobe Express - file.png">
+
 `
 
 gallery.appendChild(photo)
@@ -261,7 +299,7 @@ gallery.addEventListener("wheel",()=>auto=false)
 gallery.addEventListener("mouseenter",()=>auto=false)
 gallery.addEventListener("touchstart",()=>auto=false)
 
-/* BUTTON CONTROLS */
+/* BUTTON SCROLL */
 
 function scrollLeft(){
 auto=false
