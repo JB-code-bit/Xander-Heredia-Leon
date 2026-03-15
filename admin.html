@@ -16,10 +16,10 @@ background:url("images/IMG_0900.PNG") center/cover fixed;
 color:white;
 }
 
-/* DARK OVERLAY */
+/* OVERLAY */
 
 .overlay{
-background:rgba(0,0,0,.75);
+background:rgba(0,0,0,.8);
 min-height:100vh;
 padding:40px;
 }
@@ -28,35 +28,46 @@ padding:40px;
 
 .header{
 display:flex;
+flex-wrap:wrap;
 justify-content:space-between;
 align-items:center;
-margin-bottom:40px;
+margin-bottom:30px;
+gap:10px;
 }
 
-.header h1{
-font-size:40px;
+h1{
+margin:0;
 }
 
-/* UPLOAD BUTTON */
+/* SEARCH */
 
-.upload{
+.search{
 
-background:white;
-color:black;
+padding:10px;
 border:none;
-padding:10px 18px;
-font-size:16px;
-cursor:pointer;
-border-radius:6px;
+border-radius:5px;
 
 }
 
-/* CATEGORY */
+/* CATEGORY FILTER */
 
 select{
 
 padding:10px;
-margin-left:10px;
+border:none;
+border-radius:5px;
+
+}
+
+/* DROP ZONE */
+
+.dropzone{
+
+border:3px dashed white;
+padding:25px;
+text-align:center;
+margin-bottom:30px;
+cursor:pointer;
 
 }
 
@@ -66,7 +77,7 @@ margin-left:10px;
 
 display:grid;
 grid-template-columns:repeat(auto-fill,200px);
-gap:25px;
+gap:20px;
 justify-content:center;
 
 }
@@ -94,7 +105,7 @@ transform:scale(1.05);
 .card img{
 
 width:100%;
-height:220px;
+height:200px;
 object-fit:cover;
 
 }
@@ -111,17 +122,25 @@ text-align:center;
 .controls input{
 
 width:90%;
-margin:4px;
-padding:6px;
+padding:5px;
+margin-bottom:5px;
 
 }
 
 .controls button{
 
-margin-top:6px;
+margin:3px;
 padding:6px 10px;
 border:none;
 cursor:pointer;
+
+}
+
+.hide{
+
+background:#444;
+color:white;
+
 }
 
 .delete{
@@ -131,10 +150,17 @@ color:white;
 
 }
 
-.hide{
+/* SAVE BUTTON */
 
-background:#444;
-color:white;
+.save{
+
+margin-top:30px;
+padding:12px 20px;
+font-size:16px;
+cursor:pointer;
+border:none;
+background:white;
+color:black;
 
 }
 
@@ -150,12 +176,11 @@ color:white;
 
 <h1>Portfolio Admin</h1>
 
-<div>
+<input class="search" id="search" placeholder="Search keywords">
 
-<input type="file" id="upload" multiple>
+<select id="filter">
 
-<select id="category">
-
+<option value="all">All Categories</option>
 <option value="headshot">Headshot</option>
 <option value="waistup">Waist Up</option>
 <option value="posing">Posing</option>
@@ -166,9 +191,15 @@ color:white;
 
 </div>
 
+<div class="dropzone" id="dropzone">
+Drag Photos Here To Add
 </div>
 
 <div id="grid" class="grid"></div>
+
+<button class="save" onclick="downloadJSON()">
+Download Updated images.json
+</button>
 
 </div>
 
@@ -201,7 +232,13 @@ function display(){
 
 grid.innerHTML=""
 
+const search=document.getElementById("search").value.toLowerCase()
+const filter=document.getElementById("filter").value
+
 images.forEach((img,index)=>{
+
+if(search && !img.keywords?.toLowerCase().includes(search)) return
+if(filter!=="all" && img.category!==filter) return
 
 const card=document.createElement("div")
 card.className="card"
@@ -223,26 +260,23 @@ card.innerHTML=`
 `
 
 const keywordInput=card.querySelector("input")
+
 keywordInput.oninput=()=>{
-
 images[index].keywords=keywordInput.value
-
 }
 
 const hideBtn=card.querySelector(".hide")
-hideBtn.onclick=()=>{
 
+hideBtn.onclick=()=>{
 images[index].visible=!images[index].visible
 display()
-
 }
 
 const delBtn=card.querySelector(".delete")
-delBtn.onclick=()=>{
 
+delBtn.onclick=()=>{
 images.splice(index,1)
 display()
-
 }
 
 grid.appendChild(card)
@@ -251,32 +285,6 @@ grid.appendChild(card)
 
 }
 
-/* UPLOAD */
+/* SEARCH */
 
-document.getElementById("upload").addEventListener("change",(e)=>{
-
-const files=e.target.files
-const cat=document.getElementById("category").value
-
-for(let file of files){
-
-images.push({
-
-src:"images/uploads/"+file.name,
-category:cat,
-visible:true,
-keywords:""
-
-})
-
-}
-
-display()
-
-})
-
-</script>
-
-</body>
-
-</html>
+document.ge
