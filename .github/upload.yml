@@ -1,0 +1,30 @@
+name: Portfolio Upload
+
+on:
+repository_dispatch:
+types: [upload-file]
+
+jobs:
+upload:
+runs-on: ubuntu-latest
+
+```
+steps:
+
+  - name: Checkout repo
+    uses: actions/checkout@v4
+
+  - name: Save uploaded file
+    run: |
+      mkdir -p ${{ github.event.client_payload.folder }}
+      echo "${{ github.event.client_payload.content }}" | base64 -d > ${{ github.event.client_payload.folder }}/${{ github.event.client_payload.filename }}
+
+  - name: Commit changes
+    run: |
+      git config --global user.name "portfolio-bot"
+      git config --global user.email "bot@github.com"
+
+      git add .
+      git commit -m "New portfolio upload"
+      git push
+```
