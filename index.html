@@ -16,6 +16,7 @@
 body{
 margin:0;
 font-family:'Inter', sans-serif;
+overflow-x:hidden;
 }
 
 /* NAVBAR */
@@ -52,7 +53,7 @@ position:relative;
 color:white;
 }
 
-/* OVERLAY */
+/* DARK OVERLAY */
 
 .hero::before{
 content:"";
@@ -75,7 +76,7 @@ position:relative;
 z-index:2;
 }
 
-/* SCROLL BUTTONS */
+/* CONTROLS */
 
 .controls{
 display:flex;
@@ -92,56 +93,41 @@ color:black;
 cursor:pointer;
 }
 
-/* GALLERY */
+/* ROPE */
 
-.gallery{
+.rope{
 
-position:relative;
-display:flex;
-gap:80px;
-overflow-x:auto;
-
-padding:140px 80px 40px 80px;
-
-scroll-behavior:smooth;
-
-}
-
-/* ROPE BACKING STRIP */
-
-.gallery::before{
-
-content:"";
 position:absolute;
 
-top:70px;
+top:260px;
 left:0;
 
 width:100%;
 height:54px;
 
-background:#2b2b2b;
+background:url("images/images/landing/12Z_2103.w011.n001.500A.p15.500.jpg")
+repeat-x center;
+
+background-size:auto 54px;
 
 z-index:1;
 
 }
 
-/* ROPE IMAGE */
+/* GALLERY */
 
-.gallery::after{
+.gallery{
 
-content:"";
-position:absolute;
+position:relative;
 
-top:70px;
-left:0;
+display:flex;
+gap:80px;
 
-width:100%;
-height:54px;
+overflow-x:auto;
 
-background-image:url("images/images/landing/12Z_2103.w011.n001.500A.p15.500.jpg");
-background-repeat:repeat-x;
-background-size:auto 54px;
+padding:120px 80px 60px 80px;
+
+scroll-behavior:smooth;
 
 z-index:2;
 
@@ -151,7 +137,6 @@ z-index:2;
 
 .photo{
 position:relative;
-z-index:3;
 }
 
 /* POLAROID PLACEHOLDER */
@@ -175,14 +160,14 @@ box-shadow:0 20px 40px rgba(0,0,0,0.6);
 
 position:absolute;
 
-top:20px;
+top:15px;
 left:50%;
 
 transform:translateX(-50%);
 
 width:40px;
 
-z-index:4;
+z-index:3;
 
 }
 
@@ -217,15 +202,17 @@ transform:rotate(2deg);
 <button onclick="scrollRight()">▶</button>
 </div>
 
+<div class="rope"></div>
+
 <div class="gallery" id="gallery"></div>
 
 </section>
 
 <script>
 
-const gallery = document.getElementById("gallery")
+/* CREATE 200 POLAROID SLOTS */
 
-/* CREATE 200 EMPTY POLAROID SLOTS */
+const gallery=document.getElementById("gallery")
 
 for(let i=0;i<200;i++){
 
